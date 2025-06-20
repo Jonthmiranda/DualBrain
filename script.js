@@ -59,12 +59,13 @@ cad_task_button_container.addEventListener('click', async () => {
     }
 });
 
-
+//RENDER THE TASKS IN THE BODY, GET THE TASKS OF THE GETPENDINGTAKS FROM THE INDEXEDBD, CLEAN THE BODY, ADD NEW LINE <TR> IN THE BODY WITH A CHECKBOX
+// THE TITLE, DESCRIPTION, DATE AND TIME 
 async function renderTable() {
-    const tasks = await getPendingTasks();
-    task_table_tbody.innerHTML = '';
+    const tasks = await getPendingTasks(); //CALL PENDING TASKS FROM THIS FUNCTION
+    task_table_tbody.innerHTML = ''; //CLEAN THE BODY FIRST
     tasks.forEach(task => {
-        const row = document.createElement('tr');
+        const row = document.createElement('tr'); //CREATE NEW <TR> EM HTML AND ADD THE TASKS
         row.innerHTML = `
                 <td><input type="checkbox" data-id="${task.id}"></td>
                 <td>${task.title}</td>
@@ -72,10 +73,13 @@ async function renderTable() {
                 <td>${task.date}</td>
                 <td>${task.time}</td>
             `;
-        task_table_tbody.appendChild(row);
+        task_table_tbody.appendChild(row); //APPEND THE LINE IN THE TABLE
 });
 
-    // Adiciona o evento de click nas checkboxes
+//CLICK EVENT IN THE CHECKBOX OF THE TASKS, NEED IMPROVEMENTS, NOW, BASICALY WAIT YOU CHECK A BOX
+//AND IF THE CHECKBOX IS CHECKED, RENDER THE TABLE TO QUIT THE TASK
+
+//PRECISA ALTERAR NO BANCO DE DADOS SE CHECADO E FAZER NOVA TELA COM TASKS CONCLUIDAS
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', async function () {
             const id = this.dataset.id;
