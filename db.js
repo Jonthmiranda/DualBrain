@@ -34,30 +34,6 @@ export async function insertTask(title, description, date, time) {
     return tx.complete; //END
 }
 
-//GET THE TASKS THAT NOT CHECKED
-//GO TO ALL ITEMS IN DB AND IF NOT CHECKED ADD IN OTHER LIST
-export async function getPendingTasks() {
-    const db = await openDB(); //OPEN THE DB
-    const tx = db.transaction(STORE_NAME, "readonly");
-    const store = tx.objectStore(STORE_NAME); 
-    const tasks = [];
-
-    //THIS PART GO TO ALL ITEMS IN DB
-    return new Promise((resolve, reject) => {
-        const req = store.openCursor();
-        req.onsuccess = (e) => {
-            const cursor = e.target.result;
-            if (cursor) {
-                if (!cursor.value.checked) tasks.push(cursor.value); //IF NOT CHECKED ADD IN LIST
-                cursor.continue(); //GO TO THE OTHER ITEM
-            } else {
-                resolve(tasks); //END
-            }
-        };
-        req.onerror = () => reject(req.error); //IF HAVE A ERROR
-    });
-}
-
 //UPDATE THE CHECKED IF THE CHECKBOX IS MARKED
 //GET THE ID OF THE TASKS CHECKED, 
 export async function checkTask(id) {
@@ -69,10 +45,32 @@ export async function checkTask(id) {
         const req = store.get(Number(id)); //GET THE ID OF THE TASK
         req.onsuccess = () => {
             const task = req.result; 
-            task.checked = true; //CHECKED THE TASK
+            task.checked = !task.checked; //CHECKED THE TASK
             store.put(task); //UPDSSATE IN DB
             resolve(true); //END
         };
         req.onerror = () => reject(req.error); //IF HAVE AN ERROR
+    });
+}
+
+//GET ALL ITEMS OF THE BD
+export async function getAllTasks() {
+    const db = await openDB();
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const store = tx.objectStore(STORE_NAME);
+    const tasks = [];
+
+    return new Promise((resolve, reject) => {
+        const req = store.openCursor();
+        req.onsuccess = (e) => {
+            const cursor = e.target.result;
+            if (cursor) {
+                tasks.push(cursor.value);
+                cursor.continue();
+            } else {
+                resolve(tasks);
+            }
+        };
+        req.onerror = () => reject(req.error);
     });
 }

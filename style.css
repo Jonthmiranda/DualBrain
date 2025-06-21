@@ -200,3 +200,15 @@ CENTRALIZED AND IN TOP OF THE OTHERS DIVS, HAVE SHADOW AND MAX WIDTH AND HEIGHT*
 #fill_field_button:hover{
     background-color: #60fc8e;
 }
+
+/* Estilo padrão da linha */
+.task-row td {
+    background-color: #F6F2E5;
+    transition: background-color 0.3s;
+}
+
+/* Quando expandida, muda a cor */
+.task-row.expanded .task-checkbox,
+.task-row.expanded .task-cell {
+    background-color: #EFEBDE;
+}

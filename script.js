@@ -1,5 +1,5 @@
 //IMPORT THE FUNCTION OF DATABASE JS
-import { insertTask, getPendingTasks, checkTask } from './db.js';
+import { insertTask, checkTask, getAllTasks } from './db.js';
 
 //IMPORT THE ELEMENTS OF THE HTML
 const cad_task_button = document.getElementById('cad_task_button'); //BUTTON TO OPEN THE MODAL TO ADD NEW TASKS
@@ -62,31 +62,49 @@ cad_task_button_container.addEventListener('click', async () => {
 //RENDER THE TASKS IN THE BODY, GET THE TASKS OF THE GETPENDINGTAKS FROM THE INDEXEDBD, CLEAN THE BODY, ADD NEW LINE <TR> IN THE BODY WITH A CHECKBOX
 // THE TITLE, DESCRIPTION, DATE AND TIME 
 async function renderTable() {
-    const tasks = await getPendingTasks(); //CALL PENDING TASKS FROM THIS FUNCTION
+    console.log("funcionou");
+    const tasks = await getAllTasks(); //CALL ALL TASKS FROM THIS FUNCTION
+    const pending = tasks.filter(task => !task.checked); //TASKS NOT CHECKED
+    const done = tasks.filter(task => task.checked); //TASKS CHECKED
+    const ordered = [...pending, ...done];
     task_table_tbody.innerHTML = ''; //CLEAN THE BODY FIRST
-    tasks.forEach(task => {
+    ordered.forEach(task => {
         const row = document.createElement('tr'); //CREATE NEW <TR> EM HTML AND ADD THE TASKS
+        row.classList.add('task-row');
+
         row.innerHTML = `
-                <td><input type="checkbox" data-id="${task.id}"></td>
-                <td>${task.title}</td>
-                <td>${task.description}</td>
-                <td>${task.date}</td>
-                <td>${task.time}</td>
+            <td class="task-checkbox"><input type="checkbox" data-id="${task.id}" ${task.checked ? 'checked' : ''}></td>
+            <td class="task-cell" colspan="4">
+                <div class="task-compact"><strong>${task.title}</strong></div>
+                <div class="task-details" style="display: none;">
+                    <p>${task.description}</p>
+                    <small>Criado: ${task.date} - ${task.time}</small>
+                </div>
+            </td>
             `;
         task_table_tbody.appendChild(row); //APPEND THE LINE IN THE TABLE
 });
 
-//CLICK EVENT IN THE CHECKBOX OF THE TASKS, NEED IMPROVEMENTS, NOW, BASICALY WAIT YOU CHECK A BOX
-//AND IF THE CHECKBOX IS CHECKED, RENDER THE TABLE TO QUIT THE TASK
+task_table_tbody.querySelectorAll('.task-cell').forEach(cell => {
+    cell.addEventListener('click', () => {
+        const row = cell.closest('.task-row');
+        const details = cell.querySelector('.task-details');
+        const isExpanded = details.style.display === 'block';
 
-//PRECISA ALTERAR NO BANCO DE DADOS SE CHECADO E FAZER NOVA TELA COM TASKS CONCLUIDAS
+        details.style.display = isExpanded ? 'none' : 'block';
+        row.classList.toggle('expanded', !isExpanded);
+    });
+});
+
+//CLICK EVENT IN THE CHECKBOX OF THE TASKS, NEED IMPROVEMENTS, NOW, BASICALY WAIT YOU CHECK A BOX
+//AND IF THE CHECKBOX IS CHECKED, RENDER THE TASK GO TO END OF TABLE
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', async function () {
             const id = this.dataset.id;
-            if (this.checked) {
-                await checkTask(id);
-                await renderTable();
-            }
+            await checkTask(id);
+            await renderTable();
         });
     });
 }
+
+renderTable(); //CALL THE FUNCTION TO CHARGE THE TASKS WHEN OPEN THE SYSTEM
