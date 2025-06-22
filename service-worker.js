@@ -1,4 +1,4 @@
-const CACHE_NAME = 'iplus-v2'; // aumente a versão quando atualizar algo
+const CACHE_NAME = 'iplus-v1.3';
 
 self.addEventListener("install", event => {
   event.waitUntil(
