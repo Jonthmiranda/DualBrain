@@ -42,16 +42,29 @@ export async function checkTask(id) {
     const store = tx.objectStore(STORE_NAME);
 
     return new Promise((resolve, reject) => {
-        const req = store.get(Number(id)); //GET THE ID OF THE TASK
+        const req = store.get(Number(id));
         req.onsuccess = () => {
-            const task = req.result; 
-            task.checked = !task.checked; //CHECKED THE TASK
-            store.put(task); //UPDSSATE IN DB
-            resolve(true); //END
+            const task = req.result;
+
+            const now = new Date();
+            const date = now.toLocaleDateString('pt-BR');
+            const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+            task.checked = !task.checked;
+
+            if (task.checked) {
+                task.completedAt = { date, time }; // adiciona data de conclusão
+            } else {
+                delete task.completedAt; // remove se desmarcado
+            }
+
+            store.put(task);
+            resolve(true);
         };
-        req.onerror = () => reject(req.error); //IF HAVE AN ERROR
+        req.onerror = () => reject(req.error);
     });
 }
+
 
 //GET ALL ITEMS OF THE BD
 export async function getAllTasks() {

@@ -78,7 +78,10 @@ async function renderTable() {
                 <div class="task-compact"><strong>${task.title}</strong></div>
                 <div class="task-details" style="display: none;">
                     <p>${task.description}</p>
-                    <small>Criado: ${task.date} - ${task.time}</small>
+                    <small>
+                        Criado: ${task.date} - ${task.time} ${task.checked && task.completedAt ? 
+                        `<br> Concluído: ${task.completedAt.date} - ${task.completedAt.time}` : ''}
+                    </small>
                 </div>
             </td>
             `;
