@@ -1,6 +1,8 @@
+const CACHE_NAME = 'iplus-v2'; // aumente a versão quando atualizar algo
+
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open("v1").then(cache => {
+    caches.open(CACHE_NAME).then(cache => {
       return cache.addAll([
         "./",
         "./index.html",
@@ -11,6 +13,20 @@ self.addEventListener("install", event => {
   );
 });
 
+// ⚠️ Limpa caches antigos quando um novo service worker for ativado
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys
+          .filter(key => key !== CACHE_NAME) // mantém só o cache atual
+          .map(key => caches.delete(key))
+      )
+    )
+  );
+});
+
+// ⚙️ Serve arquivos do cache ou faz fetch online se não tiver
 self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request).then(response => {
