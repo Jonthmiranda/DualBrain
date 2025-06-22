@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 /*HTML AND BODY, SET ALL FOR 0, AND SET WIDTH AND HEIGHT TO 100% FOR THE RESPONSIVE PWA, CARET TRANSPARENT FOR ALL THE PWA*/
 html, body {
     margin: 0;
