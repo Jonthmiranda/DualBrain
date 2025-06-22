@@ -62,7 +62,6 @@ cad_task_button_container.addEventListener('click', async () => {
 //RENDER THE TASKS IN THE BODY, GET THE TASKS OF THE GETPENDINGTAKS FROM THE INDEXEDBD, CLEAN THE BODY, ADD NEW LINE <TR> IN THE BODY WITH A CHECKBOX
 // THE TITLE, DESCRIPTION, DATE AND TIME 
 async function renderTable() {
-    console.log("funcionou");
     const tasks = await getAllTasks(); //CALL ALL TASKS FROM THIS FUNCTION
     const pending = tasks.filter(task => !task.checked); //TASKS NOT CHECKED
     const done = tasks.filter(task => task.checked); //TASKS CHECKED
