@@ -111,3 +111,11 @@ task_table_tbody.querySelectorAll('.task-cell').forEach(cell => {
 }
 
 renderTable(); //CALL THE FUNCTION TO CHARGE THE TASKS WHEN OPEN THE SYSTEM
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(reg => console.log('Service Worker registrado!', reg))
+      .catch(err => console.error('Erro no Service Worker', err));
+  });
+}
