@@ -41,7 +41,7 @@ OBJECT-FIT IS SO AS NOT TO DEFORM THE LOGO WITH THE RESPONSIVE*/
 /*CONTAINER THAT STAY THE TASKS, DIMENSION BASED IN THE BODY, A LITTLE BIT OPACITY AND PADDING IN THE BORDERS*/
 .task_body_container {
     width: 100%;
-    height: 85.60%;
+    height: 82.29%;
     background-color: #F6F2E5;
     opacity: 70%;
     padding: 2%;
@@ -52,7 +52,7 @@ OBJECT-FIT IS SO AS NOT TO DEFORM THE LOGO WITH THE RESPONSIVE*/
 /*CONTAINER THAT CONTAINS THE BUTTON OF ADD TASKS, DIMENSION BASED IN THE BODY*/
 .buttons {
     width: 100%;
-    height: 6.69%;
+    height: 10%;
     background-color: #EFEBDE;
     display: flex;
     align-items: center;
@@ -67,11 +67,15 @@ CURSOR POINTER BECAUSE IT'S A BUTTON*/
     height: 100%;
     border: 0;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .ico{
     object-fit: contain;
-    height: 100%;
+    height: 80%;
     filter: opacity(50%)
 }
 
