@@ -1,4 +1,4 @@
-const CACHE_NAME = 'iplus-v1.4.3';
+const CACHE_NAME = 'iplus-v1.5.3';
 
 self.addEventListener("install", event => {
   event.waitUntil(
