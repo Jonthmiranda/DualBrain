@@ -1,4 +1,4 @@
-const CACHE_NAME = 'iplus-v1.2.3';
+const CACHE_NAME = 'iplus-v1.3.3';
 
 self.addEventListener("install", event => {
   event.waitUntil(
@@ -13,7 +13,7 @@ self.addEventListener("install", event => {
   );
 });
 
-// ⚠️ Limpa caches antigos quando um novo service worker for ativado
+// Limpa caches antigos quando um novo service worker for ativado
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -26,7 +26,7 @@ self.addEventListener("activate", event => {
   );
 });
 
-// ⚙️ Serve arquivos do cache ou faz fetch online se não tiver
+// Serve arquivos do cache ou faz fetch online se não tiver
 self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request).then(response => {
