@@ -62,16 +62,16 @@ OBJECT-FIT IS SO AS NOT TO DEFORM THE LOGO WITH THE RESPONSIVE*/
 CURSOR POINTER BECAUSE IT'S A BUTTON*/
 #menu_button, #cad_task_button {
     background-color: #EFEBDE;
-    width: 19%;
+    width: 19.4%;
     height: 100%;
     border: 0;
     cursor: pointer;
-    filter: opacity(30%);
 }
 
 .ico{
-    width: 24px;
-    height: 24px;
+    object-fit: contain;
+    height: 100%;
+    filter: opacity(50%)
 }
 
 /*ALTER BACKGROUND COLOR IF THE MOUSE CURSOR IS OVER THE BUTTON*/
