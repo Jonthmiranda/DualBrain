@@ -71,6 +71,7 @@ CURSOR POINTER BECAUSE IT'S A BUTTON*/
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: black;
 }
 
 .ico{
