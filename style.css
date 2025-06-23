@@ -62,7 +62,7 @@ OBJECT-FIT IS SO AS NOT TO DEFORM THE LOGO WITH THE RESPONSIVE*/
 CURSOR POINTER BECAUSE IT'S A BUTTON*/
 #menu_button, #cad_task_button {
     background-color: #EFEBDE;
-    width: 19.4%;
+    width: 18%;
     height: 100%;
     border: 0;
     cursor: pointer;
