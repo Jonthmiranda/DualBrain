@@ -3,12 +3,12 @@ const tasks_button = document.getElementById('tasks_button');
 const list_button = document.getElementById('list_button');
 const contability_button = document.getElementById('contability_button');
 
-tasks_button.addEventListener('click', () => {
-    window.location.replace("tasks.html");
+calendar_button.addEventListener('click', () => {
+    window.location.replace("index.html");
 });
 
-list_button.addEventListener('click', () => {
-    window.location.replace("list.html");
+tasks_button.addEventListener('click', () => {
+    window.location.replace("tasks.html");
 });
 
 contability_button.addEventListener('click', () => {
@@ -16,7 +16,7 @@ contability_button.addEventListener('click', () => {
 });
 
 async function renderTable() {
-    calendar_button.style.backgroundColor = '#DFDBCE';
+    list_button.style.backgroundColor = '#DFDBCE';
 }
 
 renderTable();

@@ -1,0 +1,53 @@
+<!--FILE FOR THE TASKS NOT CHECKED AND TASKS CHECKED-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!--HEAD: UTF8, RESPONSIVE, PWA, ICON FOR SMARTPHONE PWA AND DESKTOP IN NAVEGATOR, CSS IN OTHER FILE-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#EFEBDE" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-title" content="i++" />
+    <link rel="manifest" href="manifest.json">
+    <link rel="touch-icon" href="./images/favicon.png" />
+    <link rel="icon" href="./images/favicon.png">
+    <!--CALL THE STYLE.CSS-->
+    <link rel="stylesheet" href="./style/style_list.css">
+    <title>i++</title>
+</head>
+<!--BODY: LOGO, MENU WITH CALENDAR, TASKS, LISTS E CONTABILITY, THE BODY THAT SHOW THE TASKS IN THAT DISPLAY
+BUTTON TO ADD NEW TASKS AND THE MODAL TO ADD NEW TASKS-->
+<body>
+    <!--LOGO DIV-->
+    <div class="head_logo_container">
+        <img src="./images/logo.png" alt="logo" id="logo">
+    </div>
+    <!--BODY DIV THAT SHOW THE TASKS AND THE BUTTON TO ADD NEW TASKS-->
+    <div class="task_body_container">
+        
+        
+    </div>
+    <!--BUTTONS-->
+    <div class="buttons">
+        <button id="calendar_button">
+            <img src="./images/calendar_ico.png" alt="Calendário" class="ico">
+            Calendário
+        </button>
+        <button id="tasks_button">
+            <img src="./images/tasks_ico.png" alt="Tarefas" class="ico">
+            Tarefas
+        </button>
+        <button id="list_button">
+            <img src="./images/list_ico.png" alt="Lista" class="ico">
+            Listas
+        </button>
+        <button id="contability_button">
+            <img src="./images/contability_ico.png" alt="Contabilidade" class="ico">
+            Contabilidade
+        </button>
+    </div>
+    <div class="margin_bottom_container"></div>
+<!--CALL THE SCRIPT.JS AND THE END OF THE HTML-->
+<script type="module" src="./script/script_list.js"></script>
+</body>
+</html>

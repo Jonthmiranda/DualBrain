@@ -11,11 +11,21 @@ const cad_task_button_container = document.getElementById('cad_task_button_conta
 const task_table_tbody = document.querySelector('.task_table tbody'); //TABLE THAT THE TASKS ADDED STAY
 const is_empty_container = document.querySelector('.is_empty_container'); //MODAL THAT VERIFY IF HAVE ANY FIELD OF TASK EMPTY
 const fill_field_button = document.getElementById('fill_field_button'); //BUTTON OK IN THE VERIFY MODAL
-const tasks_button = document.getElementById('tasks_button');
 const calendar_button = document.getElementById('calendar_button');
+const tasks_button = document.getElementById('tasks_button');
+const list_button = document.getElementById('list_button');
+const contability_button = document.getElementById('contability_button');
 
 calendar_button.addEventListener('click', () => {
     window.location.replace("index.html");
+});
+
+list_button.addEventListener('click', () => {
+    window.location.replace("list.html");
+});
+
+contability_button.addEventListener('click', () => {
+    window.location.replace("contability.html");
 });
 
 //THE TASKS SAVE THE HOUR AND DATE THAT YOU ADD, SO, THIS FUNCTION GET THE HOUR AND DATE AND FORMAT TO PT-BR
