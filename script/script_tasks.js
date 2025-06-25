@@ -1,5 +1,5 @@
 //IMPORT THE FUNCTION OF DATABASE JS
-import { insertTask, checkTask, getAllTasks } from './db.js';
+import { insertTask, checkTask, getAllTasks } from '../db/db_tasks.js';
 
 //IMPORT THE ELEMENTS OF THE HTML
 const cad_task_button = document.getElementById('cad_task_button'); //BUTTON TO OPEN THE MODAL TO ADD NEW TASKS

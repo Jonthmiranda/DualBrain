@@ -6,11 +6,25 @@ self.addEventListener("install", event => {
       return cache.addAll([
         "./",
         "./index.html",
-        "./style.css",
-        "./script.js"
+        "./tasks.html",
+        "./manifest.json",
+        // JS
+        "./db/db_tasks.js",
+        "./script/script_tasks.js",
+        // CSS
+        "./style/style_calendar.css",
+        "./style/style_tasks.css",
+        // Imagens  
+        "./images/cad_ico.png",
+        "./images/calendar_ico.png",
+        "./images/contability_ico.png",
+        "./images/favicon.png",
+        "./images/list_ico.png",
+        "./images/logo.png",
+        "./images/tasks_ico.png",
       ]);
     })
-  );
+  )
 });
 
 // Limpa caches antigos quando um novo service worker for ativado
