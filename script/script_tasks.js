@@ -11,6 +11,12 @@ const cad_task_button_container = document.getElementById('cad_task_button_conta
 const task_table_tbody = document.querySelector('.task_table tbody'); //TABLE THAT THE TASKS ADDED STAY
 const is_empty_container = document.querySelector('.is_empty_container'); //MODAL THAT VERIFY IF HAVE ANY FIELD OF TASK EMPTY
 const fill_field_button = document.getElementById('fill_field_button'); //BUTTON OK IN THE VERIFY MODAL
+const tasks_button = document.getElementById('tasks_button');
+const calendar_button = document.getElementById('calendar_button');
+
+calendar_button.addEventListener('click', () => {
+    window.location.replace("index.html");
+});
 
 //THE TASKS SAVE THE HOUR AND DATE THAT YOU ADD, SO, THIS FUNCTION GET THE HOUR AND DATE AND FORMAT TO PT-BR
 function formatDateTime() {
@@ -67,6 +73,9 @@ async function renderTable() {
     const done = tasks.filter(task => task.checked); //TASKS CHECKED
     const ordered = [...pending, ...done];
     task_table_tbody.innerHTML = ''; //CLEAN THE BODY FIRST
+
+    tasks_button.style.backgroundColor = '#DFDBCE';
+
     ordered.forEach(task => {
         const row = document.createElement('tr'); //CREATE NEW <TR> EM HTML AND ADD THE TASKS
         row.classList.add('task-row');
@@ -109,8 +118,6 @@ task_table_tbody.querySelectorAll('.task-cell').forEach(cell => {
     });
 }
 
-renderTable(); //CALL THE FUNCTION TO CHARGE THE TASKS WHEN OPEN THE SYSTEM
-
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./service-worker.js')
@@ -118,3 +125,5 @@ if ('serviceWorker' in navigator) {
         .catch(err => console.error('Erro no Service Worker', err));
     });
 }
+
+renderTable(); //CALL THE FUNCTION TO CHARGE THE TASKS WHEN OPEN THE SYSTEM

@@ -63,7 +63,7 @@ OBJECT-FIT IS SO AS NOT TO DEFORM THE LOGO WITH THE RESPONSIVE*/
 
 /*THE MENU_BUTTONS, COLOR: BLACK IS FOR THE LETTERS, DIMENSION BASED IN THE .MENU_CONTAINER, WE DON'T WANT SPACE IN BUTTON TO BUTTON SO IT'S 0
 CURSOR POINTER BECAUSE IT'S A BUTTON*/
-#menu_button, #cad_task_button {
+#list_button, #contability_button, #tasks_button, #calendar_button, #cad_task_button {
     background-color: #EFEBDE;
     width: 20%;
     height: 100%;
@@ -83,7 +83,7 @@ CURSOR POINTER BECAUSE IT'S A BUTTON*/
 }
 
 /*ALTER BACKGROUND COLOR IF THE MOUSE CURSOR IS OVER THE BUTTON*/
-#menu_button:active, #menu_button:hover, #cad_task_button:hover {
+#list_button:hover, #contability_button:hover, #tasks_button:hover, #calendar_button:hover, #cad_task_button:hover {
     background-color: #DFDBCE;
 }
 
