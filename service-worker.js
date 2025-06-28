@@ -1,4 +1,4 @@
-const CACHE_NAME = 'iplus-v1.7.0';
+const CACHE_NAME = 'iplus-v1.7.2';
 
 self.addEventListener("install", event => {
   event.waitUntil(
@@ -6,14 +6,12 @@ self.addEventListener("install", event => {
       return cache.addAll([
         "./",
         "./index.html",
-        "./tasks.html",
         "./manifest.json",
         // JS
-        "./db/db_tasks.js",
-        "./script/script_tasks.js",
+        "./db.js",
+        "./script.js",
         // CSS
-        "./style/style_calendar.css",
-        "./style/style_tasks.css",
+        "./style.css",
         // Imagens  
         "./images/cad_ico.png",
         "./images/calendar_ico.png",

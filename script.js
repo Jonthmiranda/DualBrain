@@ -1,5 +1,5 @@
 //IMPORT THE FUNCTION OF DATABASE JS
-import { insertTask, checkTask, getAllTasks } from '../db/db_tasks.js';
+import { insertTask, checkTask, getAllTasks } from './db.js';
 
 //IMPORT THE ELEMENTS OF THE HTML
 const cad_task_button = document.getElementById('cad_task_button'); //BUTTON TO OPEN THE MODAL TO ADD NEW TASKS
@@ -15,18 +15,56 @@ const calendar_button = document.getElementById('calendar_button');
 const tasks_button = document.getElementById('tasks_button');
 const list_button = document.getElementById('list_button');
 const contability_button = document.getElementById('contability_button');
+const task_page = document.getElementById('task_page');
+const calendar_page = document.getElementById('calendar_page');
+const annotation_page = document.getElementById('annotation_page');
+const contability_page = document.getElementById('contability_page');
 
+//MUDANÇAS DE TELAS
 calendar_button.addEventListener('click', () => {
-    window.location.replace("index.html");
+    calendar_page.style.display = 'flex';
+    annotation_page.style.display = 'none';
+    contability_page.style.display = 'none';
+    task_page.style.display = 'none';
+    calendar_button.style.backgroundColor = '#DFDBCE';
+    tasks_button.style.backgroundColor = '#EFEBDE';
+    list_button.style.backgroundColor = '#EFEBDE';
+    contability_button.style.backgroundColor = '#EFEBDE';
+});
+
+tasks_button.addEventListener('click', () => {
+    calendar_page.style.display = 'none';
+    annotation_page.style.display = 'none';
+    contability_page.style.display = 'none';
+    task_page.style.display = 'flex';
+    calendar_button.style.backgroundColor = '#EFEBDE';
+    tasks_button.style.backgroundColor = '#DFDBCE';
+    list_button.style.backgroundColor = '#EFEBDE';
+    contability_button.style.backgroundColor = '#EFEBDE';
 });
 
 list_button.addEventListener('click', () => {
-    window.location.replace("list.html");
+    calendar_page.style.display = 'none';
+    annotation_page.style.display = 'flex';
+    contability_page.style.display = 'none';
+    task_page.style.display = 'none';
+    calendar_button.style.backgroundColor = '#EFEBDE';
+    tasks_button.style.backgroundColor = '#EFEBDE';
+    list_button.style.backgroundColor = '#DFDBCE';
+    contability_button.style.backgroundColor = '#EFEBDE';
 });
 
 contability_button.addEventListener('click', () => {
-    window.location.replace("contability.html");
+    calendar_page.style.display = 'none';
+    annotation_page.style.display = 'none';
+    contability_page.style.display = 'flex';
+    task_page.style.display = 'none';
+    calendar_button.style.backgroundColor = '#EFEBDE';
+    tasks_button.style.backgroundColor = '#EFEBDE';
+    list_button.style.backgroundColor = '#EFEBDE';
+    contability_button.style.backgroundColor = '#DFDBCE';
 });
+
 
 //THE TASKS SAVE THE HOUR AND DATE THAT YOU ADD, SO, THIS FUNCTION GET THE HOUR AND DATE AND FORMAT TO PT-BR
 function formatDateTime() {
@@ -84,7 +122,8 @@ async function renderTable() {
     const ordered = [...pending, ...done];
     task_table_tbody.innerHTML = ''; //CLEAN THE BODY FIRST
 
-    tasks_button.style.backgroundColor = '#DFDBCE';
+    calendar_button.style.backgroundColor = '#DFDBCE';
+    calendar_page.style.display = 'flex';
 
     ordered.forEach(task => {
         const row = document.createElement('tr'); //CREATE NEW <TR> EM HTML AND ADD THE TASKS

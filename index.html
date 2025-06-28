@@ -12,7 +12,7 @@
     <link rel="touch-icon" href="./images/favicon.png" />
     <link rel="icon" href="./images/favicon.png">
     <!--CALL THE STYLE.CSS-->
-    <link rel="stylesheet" href="./style/style_calendar.css">
+    <link rel="stylesheet" href="./style.css">
     <title>i++</title>
 </head>
 <!--BODY: LOGO, MENU WITH CALENDAR, TASKS, LISTS E CONTABILITY, THE BODY THAT SHOW THE TASKS IN THAT DISPLAY
@@ -23,31 +23,80 @@ BUTTON TO ADD NEW TASKS AND THE MODAL TO ADD NEW TASKS-->
         <img src="./images/logo.png" alt="logo" id="logo">
     </div>
     <!--BODY DIV THAT SHOW THE TASKS AND THE BUTTON TO ADD NEW TASKS-->
-    <div class="task_body_container">
+    <div class="body_container">
         
+        <div id="calendar_page">
+            <!--TUDO DA TELA CALENDARIO AQUI, ADICIONA LEMBRETES DO QUE VOCÊ TEM DE FAZER-->
+        </div>
+
+        <!--HERE SHOW THE TASKS ADD,
+        **ALTERAR** você adiciona exemplo: faculdade, e dentro dessa faculdade você adiciona o que você vai checar
+        você pode adicionar excluir e alterar-->
+        <div id="task_page">
+            <table class="task_table">
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <!--PODE ADICIONAR BLOCOS DE ANOTAÇÕES DIVERSAS-->
+        <div id="annotation_page">
+
+        </div>
+
+        <!--CONTABILIDADE, QUANTO GANHA NO MES, E OS GASTOS-->
+        <div id="contability_page">
+
+        </div>
+
         
+        <!--MODAL TO ADD NEW TASKS-->
+        <div class="modal_cad_task_container">
+            <h4>Cadastrar Nova Tarefa</h4>
+            <p class="cad_task_input_title">Título</p>
+            <textarea type="text" id="title_task" name="title_task"></textarea>
+            <p class="cad_task_input_title">Detalhes</p>
+            <textarea type="text" id="descrition_task" name="descrition_task"></textarea>
+            <button id="cad_task_button_container">Cadastrar</button>
+            <button id="cancel_task_button_container">Cancelar</button>
+            
+            <!--MODAL FOR THE VERIFICATION EMPTY FIELDS-->
+            <div class="is_empty_container">
+                <p>Preencha os campos</p>
+                <button id="fill_field_button">Ok</button>
+            </div>
+
+        </div>
     </div>
-    <!--BUTTONS-->
+
+
+    <!--THE MENU-->
+    <!--BUTTON TO ADD NEW TASKS-->
     <div class="buttons">
         <button id="calendar_button">
             <img src="./images/calendar_ico.png" alt="Calendário" class="ico">
             Calendário
         </button>
         <button id="tasks_button">
-            <img src="./images/tasks_ico.png" alt="Tarefas" class="ico">
-            Tarefas
+            <img src="./images/tasks_ico.png" alt="Checklist" class="ico">
+            Checklist
         </button>
         <button id="list_button">
-            <img src="./images/list_ico.png" alt="Lista" class="ico">
-            Listas
+            <img src="./images/list_ico.png" alt="Anotações" class="ico">
+            Anotações
         </button>
         <button id="contability_button">
             <img src="./images/contability_ico.png" alt="Contabilidade" class="ico">
             Contabilidade
         </button>
+        <button id="cad_task_button">
+            <img src="./images/cad_ico.png" alt="Cadastrar" class="ico">
+            Cadastrar
+        </button>
     </div>
     <div class="margin_bottom_container"></div>
-<!--CALL THE SCRIPT.JS AND THE END OF THE HTML-->
-<script type="module" src="./script/script_calendar.js"></script>
+    <!--CALL THE SCRIPT.JS AND THE END OF THE HTML-->
+    <script type="module" src="./script.js"></script>
+
 </body>
 </html>
