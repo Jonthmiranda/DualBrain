@@ -79,9 +79,9 @@ request.onupgradeneeded = function (event) {
         const IAStore = db.createObjectStore("IA", { keyPath: "Id", autoIncrement: true});
 
         IAStore.createIndex("ProjectId", "ProjectId", { unique: false });
-        IAStore.createIndex("Question", "Question", { unique: false });
-        IAStore.createIndex("Response", "Response", { unique: false });
-        IAStore.createIndex("Date", "Date", { unique: false });
+        IAStore.createIndex("Role", "Role", { unique: false});
+        IAStore.createIndex("Content", "Content", { unique: false });
+        IAStore.createIndex("Timestamp", "Timestamp", { unique: false });
     };
 }
 
@@ -349,7 +349,6 @@ async function InsertTemplateChecklist(ProjectId) {
 //INSERT CHECKLIST
 //INSERT INTO Checklists (ProjectId, Step, Tasks, Completed) VALUES (x, x, x, Null)
 async function InsertChecklist(ProjectId, Step, Tasks) {
-    ProjectId = 6;
     try {
         const db = await OpenDB();
         const tx = db.transaction("Checklists", "readwrite");
@@ -455,7 +454,6 @@ async function UpdateChecklist(Id, Step, Tasks, Completed) {
 //DELETE CHECKLIST
 //DELETE FROM Checklists WHERE Id = x;
 async function DeleteChecklist(Id) {
-    Id = 36;
     try {
         const db = await OpenDB();
         const tx = db.transaction("Checklists", "readwrite");
@@ -475,16 +473,257 @@ async function DeleteChecklist(Id) {
     }
 }
 
-//NOTES SCREEN
+//NOTES SCREEN PRECISA SER TESTADO TUDO DAQUI PARA BAIXO
 
 //SELECT NOTES
-//
+//SELECT Title, Text, Date FROM Notes WHERE ProjectId = x
+async function SelectNotes(ProjectId) {
+    try {
+        const db = await OpenDB();
+        const tx = db.transaction("Notes", "readonly");
+        const store = tx.objectStore("Notes");
+        const index = store.index("ProjectId");
+        const range = IDBKeyRange.only(ProjectId);
+        const request = index.getAll(range);
+
+        request.onsuccess = () => {
+            const notes = request.result;
+
+              const results = notes.map(item => ({
+                Id: item.Id,
+                Title: item.Title,
+                Text: item.Text,
+                Date: item.Date
+            }));
+            console.log("Notas encontrados:", results);
+        };
+
+        request.onerror = () => {
+            console.error("Erro ao buscar Notas.");
+        };
+    } finally {
+        CloseDB();
+    }
+}
 
 //INSERT NOTE
-//
+//INSERT INTO Notes (ProjectId, Title, Text, Date) VALUES (x, x, x, x)
+async function InsertNote(ProjectId, Title, Text, Date) {
+    try {
+        const db = await OpenDB();
+        const tx = db.transaction("Notes", "readwrite");
+        const store = tx.objectStore("Notes");
+
+        const newNote = {
+            ProjectId: ProjectId,
+            Title: Title,
+            Text: Text,
+            Date: Date
+        };
+
+        const request = store.add(newNote);
+
+        request.onsuccess = () => {
+            console.log("Nota inserido com sucesso!");
+        };
+
+        request.onerror = () => {
+            console.error("Erro ao inserir Nota.");
+        };
+    } finally {
+        CloseDB();
+    }
+}
 
 //UPDATE NOTE
-//
+//UPDATE Notes SET Title = x, Text = x, Date = x WHERE Id = x
+async function UpdateNote(Id, Title, Text, Date) {
+    try {
+        const db = await OpenDB();
+        const tx = db.transaction("Notes", "readwrite");
+        const store = tx.objectStore("Notes");
+        const getRequest = store.get(Id);
+
+        getRequest.onsuccess = () => {
+            const data = getRequest.result;
+            if (data) {
+                data.Title = Title;
+                data.Text = Text;
+                data.Date = Date;
+
+                const updateRequest = store.put(data);
+
+                updateRequest.onsuccess = () => {
+                    console.log(`Nota ${Id} atualizado com sucesso.`);
+                };
+
+                updateRequest.onerror = (event) => {
+                    console.error("Erro ao atualizar Nota:", event.target.error);
+                };
+            } else {
+                console.warn(`Nota com id ${Id} não encontrado.`);
+            }
+        };
+
+        getRequest.onerror = (event) => {
+            console.error("Erro ao buscar Nota:", event.target.error);
+        };
+    } finally {
+        CloseDB();
+    }
+}
 
 //DELETE NOTE
-//
+//DELETE FROM Notes WHERE Id = x
+async function DeleteNote(Id) {
+  Id = 1;
+    try {
+        const db = await OpenDB();
+        const tx = db.transaction("Notes", "readwrite");
+        const store = tx.objectStore("Notes");
+
+        const deleteRequest = store.delete(Id);
+
+        deleteRequest.onsuccess = () => {
+            console.log(`Nota ${Id} deletado com sucesso.`);
+        };
+
+        deleteRequest.onerror = (event) => {
+            console.error("Erro ao deletar Nota:", event.target.error);
+        };
+    } finally {
+        CloseDB();
+    }
+}
+
+//SCRUMS SCREEN
+
+//SELECT SCRUMS
+//SELECT Date, Yesterday, Today, Locks FROM Scrums WHERE ProjectId = x
+async function SelectScrums(ProjectId) {
+    try {
+        const db = await OpenDB();
+        const tx = db.transaction("Scrums", "readonly");
+        const store = tx.objectStore("Scrums");
+        const index = store.index("ProjectId");
+        const range = IDBKeyRange.only(ProjectId);
+        const request = index.getAll(range);
+
+        request.onsuccess = () => {
+            const scrums = request.result;
+
+              const results = scrums.map(item => ({
+                Date: item.Date,
+                Yesterday: item.Yesterday,
+                Today: item.Today,
+                Locks: item.Locks
+            }));
+            console.log("Scrums encontrados:", results);
+        };
+
+        request.onerror = () => {
+            console.error("Erro ao buscar Scrums.");
+        };
+    } finally {
+        CloseDB();
+    }
+}
+
+//INSERT Scrum
+//INSERT INTO Scrum (ProjectId, Date, Yesterday, Today, Locks) VALUES (x, x, x, x, x)
+async function InsertScrum(ProjectId, Date, Yesterday, Today, Locks) {
+    try {
+        const db = await OpenDB();
+        const tx = db.transaction("Scrums", "readwrite");
+        const store = tx.objectStore("Scrums");
+
+        const newScrum = {
+            ProjectId: ProjectId,
+            Date: Date,
+            Yesterday: Yesterday,
+            Today: Today,
+            Locks: Locks
+        };
+
+        const request = store.add(newScrum);
+
+        request.onsuccess = () => {
+            console.log("Scrum inserido com sucesso!");
+        };
+
+        request.onerror = () => {
+            console.error("Erro ao inserir Scrum.");
+        };
+    } finally {
+        CloseDB();
+    }
+}
+
+//IA SCREEN
+
+//SELECT IA HISTORIC
+//SELECT Role, Content, Timestamp FROM IA WHERE ProjectId = X ODER BY Id
+async function SelectIAHistoric(ProjectId) {
+    try {
+        const db = await OpenDB();
+        const tx = db.transaction("IA", "readonly");
+        const store = tx.objectStore("IA");
+        const index = store.index("ProjectId");
+
+        const request = index.getAll(ProjectId);
+
+        return await new Promise((resolve, reject) => {
+            request.onsuccess = () => {
+                const results = request.result;
+
+                results.sort((a, b) => a.Id - b.Id);
+
+                const filtered = results.map(item => ({
+                    Role: item.Role,
+                    Content: item.Content,
+                }));
+
+                resolve(filtered);
+            };
+
+            request.onerror = (event) => {
+                reject("Erro ao buscar mensagens IA: " + event.target.error);
+            };
+        });
+
+    } catch (error) {
+        console.error("Erro ao buscar IA por ProjectId ordenado por ID:", error);
+        throw error;
+    } finally {
+        CloseDB();
+    }
+}
+
+//INSERT IA MSG
+//INSERT INTO IA (ProjectId, Role, Content, Timestamp) VALUES (x, x, x, x)
+async function InsertIAmsg(ProjectId, Role, Content, Timestamp) {
+    try {
+        const db = await OpenDB();
+        const tx = db.transaction("IA", "readwrite");
+        const store = tx.objectStore("IA");
+
+        const newMsg = {
+            ProjectId: ProjectId,
+            Role: Role,
+            Content: Content,
+            Timestamp: Timestamp,
+        };
+
+        const request = store.add(newMsg);
+
+        request.onsuccess = () => {
+            console.log("Msg inserida com sucesso!");
+        };
+
+        request.onerror = () => {
+            console.error("Erro ao inserir a mensagem.");
+        };
+    } finally {
+        CloseDB();
+    }
+}
