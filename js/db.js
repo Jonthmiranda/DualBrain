@@ -1,14 +1,14 @@
 let db = null;
 
 //OPEN DATABASE
-function OpenDB(){
+function OpenDB() {
     return new Promise((resolve, reject) => {
         if (db) {
             resolve(db);
             return;
         }
         const request = indexedDB.open("FokysPWA", 1);//name and version
-        
+
         request.onsuccess = (event) => {
             db = event.target.result;
             resolve(db);
@@ -21,7 +21,7 @@ function OpenDB(){
 }
 
 //CLOSE DATABASE
-function CloseDB(){
+function CloseDB() {
     if (db) {
         db.close();
         db = null;
@@ -35,7 +35,7 @@ request.onupgradeneeded = function (event) {
     const db = event.target.result;
     if (!db.objectStoreNames.contains("Projects")) { //verify if the store/table exist
         //create table projects
-        const projectStore = db.createObjectStore("Projects", { keyPath: "Id", autoIncrement: true});
+        const projectStore = db.createObjectStore("Projects", { keyPath: "Id", autoIncrement: true });
 
         projectStore.createIndex("Name", "Name", { unique: false });
         projectStore.createIndex("Description", "Description", { unique: false });
@@ -46,17 +46,17 @@ request.onupgradeneeded = function (event) {
 
     //create table checklist
     if (!db.objectStoreNames.contains("Checklists")) {
-        const checklistStore = db.createObjectStore("Checklists", { keyPath: "Id", autoIncrement: true});
+        const checklistStore = db.createObjectStore("Checklists", { keyPath: "Id", autoIncrement: true });
 
         checklistStore.createIndex("ProjectId", "ProjectId", { unique: false });
         checklistStore.createIndex("Step", "Step", { unique: false });
         checklistStore.createIndex("Tasks", "Tasks", { unique: false });
         checklistStore.createIndex("Completed", "Completed", { unique: false });
     };
-    
+
     //create table Scrums
     if (!db.objectStoreNames.contains("Scrums")) {
-        const ScrumsStore = db.createObjectStore("Scrums", { keyPath: "Id", autoIncrement: true});
+        const ScrumsStore = db.createObjectStore("Scrums", { keyPath: "Id", autoIncrement: true });
 
         ScrumsStore.createIndex("ProjectId", "ProjectId", { unique: false });
         ScrumsStore.createIndex("Date", "Date", { unique: false });
@@ -64,9 +64,9 @@ request.onupgradeneeded = function (event) {
         ScrumsStore.createIndex("Today", "Today", { unique: false });
         ScrumsStore.createIndex("Locks", "Locks", { unique: false });
     };
-       //create table Notes
+    //create table Notes
     if (!db.objectStoreNames.contains("Notes")) {
-        const NotesStore = db.createObjectStore("Notes", { keyPath: "Id", autoIncrement: true});
+        const NotesStore = db.createObjectStore("Notes", { keyPath: "Id", autoIncrement: true });
 
         NotesStore.createIndex("ProjectId", "ProjectId", { unique: false });
         NotesStore.createIndex("Title", "Title", { unique: false });
@@ -74,12 +74,12 @@ request.onupgradeneeded = function (event) {
         NotesStore.createIndex("Date", "Date", { unique: false });
     };
 
-       //create table IA
+    //create table IA
     if (!db.objectStoreNames.contains("IA")) {
-        const IAStore = db.createObjectStore("IA", { keyPath: "Id", autoIncrement: true});
+        const IAStore = db.createObjectStore("IA", { keyPath: "Id", autoIncrement: true });
 
         IAStore.createIndex("ProjectId", "ProjectId", { unique: false });
-        IAStore.createIndex("Role", "Role", { unique: false});
+        IAStore.createIndex("Role", "Role", { unique: false });
         IAStore.createIndex("Content", "Content", { unique: false });
         IAStore.createIndex("Timestamp", "Timestamp", { unique: false });
     };
@@ -113,7 +113,7 @@ async function SelectProjects() {
         request.onerror = () => {
             console.error("Erro ao buscar projetos.");//preparar tela de erro
         };
-    }finally{
+    } finally {
         CloseDB();
     }
 }
@@ -141,7 +141,7 @@ async function InsertProject(Name, Description, Stacks, DateStart, DateEnd) {
                 console.log("passou aqui");
                 resolve(addRequest.result); // Retorna o ID gerado
             };
-            
+
             addRequest.onerror = (event) => {
                 reject(event.target.error);
             };
@@ -194,7 +194,7 @@ async function UpdateProject(Id, Name, Description, Stacks, DateStart, DateEnd) 
 
 //DELETE PROJECT
 //DELETE FROM Projects WHERE ID = X;
-async function DeleteProject(Id){
+async function DeleteProject(Id) {
     try {
         db = await OpenDB();
         const tx = db.transaction("Projects", "readwrite");
@@ -213,7 +213,7 @@ async function DeleteProject(Id){
         await DeleteDependencies(db, "Scrums", Id);
         await DeleteDependencies(db, "Notes", Id);
 
-    }catch (error) {
+    } catch (error) {
         console.error("Erro ao deletar projeto:", error);
         throw error;
     } finally {
@@ -298,41 +298,41 @@ async function InsertTemplateChecklist(ProjectId) {
 
         const checklistTemplate = [
             // ETAPA 1: Planejamento
-            {ProjectId: ProjectId, Step: "Planejamento", Tasks: "Entendimento do problema", Completed: false},
-            {ProjectId: ProjectId,Step: "Planejamento",Tasks: "Escolhas técnicas",Completed: false},
-            {ProjectId: ProjectId, Step: "Planejamento", Tasks: "Levantamento de requisitos", Completed: false},
-            {ProjectId: ProjectId, Step: "Planejamento", Tasks: "Fluxos de uso UML", Completed: false},
-            {ProjectId: ProjectId, Step: "Planejamento", Tasks: "Regras de negócio", Completed: false},
+            { ProjectId: ProjectId, Step: "Planejamento", Tasks: "Entendimento do problema", Completed: false },
+            { ProjectId: ProjectId, Step: "Planejamento", Tasks: "Escolhas técnicas", Completed: false },
+            { ProjectId: ProjectId, Step: "Planejamento", Tasks: "Levantamento de requisitos", Completed: false },
+            { ProjectId: ProjectId, Step: "Planejamento", Tasks: "Fluxos de uso UML", Completed: false },
+            { ProjectId: ProjectId, Step: "Planejamento", Tasks: "Regras de negócio", Completed: false },
             // ETAPA 2: Projeto (Design)
-            {ProjectId: ProjectId, Step: "Projeto", Tasks: "Modelagem do BD", Completed: false},
-            {ProjectId: ProjectId, Step: "Projeto", Tasks: "Wireframes", Completed: false},
-            {ProjectId: ProjectId, Step: "Projeto", Tasks: "Arquitetura de software", Completed: false},
-            {ProjectId: ProjectId, Step: "Projeto", Tasks: "UI/UX", Completed: false},
+            { ProjectId: ProjectId, Step: "Projeto", Tasks: "Modelagem do BD", Completed: false },
+            { ProjectId: ProjectId, Step: "Projeto", Tasks: "Wireframes", Completed: false },
+            { ProjectId: ProjectId, Step: "Projeto", Tasks: "Arquitetura de software", Completed: false },
+            { ProjectId: ProjectId, Step: "Projeto", Tasks: "UI/UX", Completed: false },
             // ETAPA 3: Desenvolvimento
-            {ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Criação do banco de dados", Completed: false},
-            {ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Criação da estrutura do projeto", Completed: false},
-            {ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Programação da lógica", Completed: false},
-            {ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Programação da interface", Completed: false},
-            {ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Integração Front + Back + BD", Completed: false},
+            { ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Criação do banco de dados", Completed: false },
+            { ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Criação da estrutura do projeto", Completed: false },
+            { ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Programação da lógica", Completed: false },
+            { ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Programação da interface", Completed: false },
+            { ProjectId: ProjectId, Step: "Desenvolvimento", Tasks: "Integração Front + Back + BD", Completed: false },
             // ETAPA 4: Testes
-            {ProjectId: ProjectId, Step: "Testes", Tasks: "Testes funcionais", Completed: false},
-            {ProjectId: ProjectId, Step: "Testes", Tasks: "Testes de usabilidade", Completed: false},
-            {ProjectId: ProjectId, Step: "Testes", Tasks: "Testes de segurança", Completed: false},
-            {ProjectId: ProjectId, Step: "Testes", Tasks: "Testes de performance", Completed: false},
-            {ProjectId: ProjectId, Step: "Testes", Tasks: "Correções de bugs", Completed: false},
+            { ProjectId: ProjectId, Step: "Testes", Tasks: "Testes funcionais", Completed: false },
+            { ProjectId: ProjectId, Step: "Testes", Tasks: "Testes de usabilidade", Completed: false },
+            { ProjectId: ProjectId, Step: "Testes", Tasks: "Testes de segurança", Completed: false },
+            { ProjectId: ProjectId, Step: "Testes", Tasks: "Testes de performance", Completed: false },
+            { ProjectId: ProjectId, Step: "Testes", Tasks: "Correções de bugs", Completed: false },
             // ETAPA 5: Publicação
-            {ProjectId: ProjectId, Step: "Publicação", Tasks: "Deploy", Completed: false},
-            {ProjectId: ProjectId, Step: "Publicação", Tasks: "Configuração de domínio (Opcional)", Completed: false},
-            {ProjectId: ProjectId, Step: "Publicação", Tasks: "Documentação final", Completed: false}
+            { ProjectId: ProjectId, Step: "Publicação", Tasks: "Deploy", Completed: false },
+            { ProjectId: ProjectId, Step: "Publicação", Tasks: "Configuração de domínio (Opcional)", Completed: false },
+            { ProjectId: ProjectId, Step: "Publicação", Tasks: "Documentação final", Completed: false }
         ];
 
-        for (const item of checklistTemplate){
+        for (const item of checklistTemplate) {
             const request = store.add(item);
 
             request.onsuccess = () => {
                 console.log("tamplate de checklist inserido com sucesso!");
             };
-            
+
             request.onerror = (error) => {
                 console.log("Erro ao adicionar tamplate de checklist", error);
             };
@@ -389,7 +389,7 @@ async function UpdateChecklistCompleted(Id) {
             const data = getRequest.result;
             if (data) {
                 data.Completed = !data.Completed;
-            
+
                 const updateRequest = store.put(data); // salva de volta
 
                 updateRequest.onsuccess = () => {
@@ -489,7 +489,7 @@ async function SelectNotes(ProjectId) {
         request.onsuccess = () => {
             const notes = request.result;
 
-              const results = notes.map(item => ({
+            const results = notes.map(item => ({
                 Id: item.Id,
                 Title: item.Title,
                 Text: item.Text,
@@ -576,7 +576,7 @@ async function UpdateNote(Id, Title, Text, Date) {
 //DELETE NOTE
 //DELETE FROM Notes WHERE Id = x
 async function DeleteNote(Id) {
-  Id = 1;
+    Id = 1;
     try {
         const db = await OpenDB();
         const tx = db.transaction("Notes", "readwrite");
@@ -612,7 +612,7 @@ async function SelectScrums(ProjectId) {
         request.onsuccess = () => {
             const scrums = request.result;
 
-              const results = scrums.map(item => ({
+            const results = scrums.map(item => ({
                 Date: item.Date,
                 Yesterday: item.Yesterday,
                 Today: item.Today,
