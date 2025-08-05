@@ -34,9 +34,23 @@ section {
   height: 90%;
   width: 100%;
 }
+
 nav {
   height: 10%;
   width: 100%;
+  display: flex;
+}
+
+button {
+  border-radius: 10px;
+  border: 0px;
+  height: 100%;
+  width: 25%;
+}
+
+button:hover {
+  background-color: white;
+  cursor: pointer;
 }
 
 footer {
