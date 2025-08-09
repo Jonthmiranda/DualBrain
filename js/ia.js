@@ -25,7 +25,7 @@
   border-radius: 25px;
   padding: 10px 14px;
   max-width: 80%;
-  
+  margin-bottom: 10px;
 }
 
 .Context {
@@ -47,3 +47,4 @@
   width: 100%;
   height: auto;
 }
+
