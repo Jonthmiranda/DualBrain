@@ -255,17 +255,19 @@ footer {
     cursor: pointer;
 }
 
-/*IA SCREEN*/
+/*CHAT IA*/
 /*TROCAR AS CORES*/
 .HistoricIA {
     display: flex;
     width: 100%;
-    height: 85%;
+    height: 75%;
     flex-direction: column;
     align-items: center;
     flex-direction: column-reverse;
     /*CONFIRMAR SE VAI SER NECESSARIO*/
     overflow-y: auto;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .HistoricIA div {
@@ -296,4 +298,40 @@ footer {
 #TextToIA {
     width: 100%;
     height: auto;
+}
+
+/*SCRUM SCREEN*/
+
+.ScrumList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.ScrumList button {
+    color: black;
+    background-color: #F4F4F4;
+    border-radius: 10px;
+    border: 0;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px;
+    position: relative;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.ScrumList button:nth-child(even) {
+    background-color: #eeeded;
+}
+
+.ScrumList button:hover {
+    background-color: #d6d4d4;
+    cursor: pointer;
 }
