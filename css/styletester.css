@@ -41,6 +41,7 @@ main {
 }
 
 section {
+    overflow-y: auto;
     height: 90%;
     width: 100%;
 }
@@ -49,6 +50,7 @@ section {
     height: 10%;
     width: 100%;
     display: flex;
+    position: fixed;
     /*display: none; /*somente quando ta na tela de escolha de projetos*/
 }
 
@@ -59,6 +61,10 @@ section {
     border: 0px;
     height: 100%;
     width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav button:hover {
@@ -79,6 +85,7 @@ section {
 footer {
     height: 10%;
     width: 100%;
+    position: fixed;
 }
 
 /*PROJECTS SCREEN*/
@@ -135,6 +142,11 @@ footer {
     border: 0;
     height: 10%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
 }
 
 #cadProject:hover {
@@ -148,7 +160,24 @@ footer {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 85%;
+    height: 87%;
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.ChecklistList input[type="checkbox"] {
+    transform: scale(1.2); 
+    cursor: pointer;
+    margin: 7px 15px;
+}
+
+.ChecklistList li:nth-child(even) {
+    background-color: #eeeded;
+}
+
+.ChecklistList label:hover {
+    cursor: pointer;
 }
 
 #cadChecklist {
@@ -158,9 +187,85 @@ footer {
     border: 0;
     height: 10%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
 }
 
 #cadChecklist:hover {
     background-color: #d6d4d4;
     cursor: pointer;
+}
+
+/*NOTES SCREEN*/
+
+.noteList {
+    width: 100%;
+    height: 87%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 25px;
+    padding: 16px;
+}
+
+.noteList button {
+    background-color: #fdfdfd;
+    border-radius: 25px;
+    width: auto;
+    height: auto;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    border: none;
+    color: black;
+    align-items: start;
+    min-width: 140px; 
+    max-width: 200px; 
+    min-height: 100px;
+    max-height: 150px;
+    white-space: nowrap;
+}
+
+.noteList button:hover {
+    background-color: #d6d4d4;
+    cursor: pointer;
+}
+
+.noteList::after {
+    content: "";
+    display:block;
+    height: 215px;
+}
+
+#cadNote {
+    color: black;
+    background-color: #F4F4F4;
+    border-radius: 10px;
+    border: 0;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#cadNote:hover {
+    background-color: #d6d4d4;
+    cursor: pointer;
+}
+
+/*IA SCREEN*/
+.HistoricIA {
+    width: 100%;
+    height: 79%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 25px;
+    padding: 16px;
+}
+
+#TextToIA {
+    width: 100%;
+    position: fixed;
 }

@@ -12,4 +12,4 @@
         <span class="description">Em andamento</span>
     </button>
 </div>
-<button id="cadProject"><img src="./assets/cad.png" alt="cadProject" class="buttonLogo"></button>
+<button id="cadProject"><img src="./assets/cad.png" alt="cadProject" class="buttonLogo"><span>Add Project</span></button>
