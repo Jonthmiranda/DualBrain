@@ -418,8 +418,6 @@ footer {
     height: 15%;
 }
 
-/*BUTTON TO ADD TASKS COMPLETED IN THE FIELDS TITLE AND DESCRIPTION BORDER ROUNDED, CURSOR POINTER, DIMENSION BASED IN THE .MODAL...
-AND THE MARGIN TOP */
 #AddChecklistButton {
     border-radius: 10px;
     color: black;
@@ -431,7 +429,6 @@ AND THE MARGIN TOP */
     margin-top: 8%;
 }
 
-/*IF THE MOUSE CURSOS IN THE BUTTON TO ADD TASKS*/
 #AddChecklistButton:hover {
     background-color: #60fc8e;
 }
