@@ -13,3 +13,17 @@
     </button>
 </div>
 <button id="cadProject"><img src="./assets/cad.png" alt="cadProject" class="buttonLogo"><span>Add Project</span></button>
+
+<div class="AddProjectModal">
+            <h4>Add Project</h4>
+            <textarea type="text" id="Name" name="Name" placeholder="Name"></textarea>
+            <textarea type="text" id="Description" name="Description" placeholder="Description"></textarea>
+            <textarea type="text" id="Staks" name="Staks" placeholder="Technology"></textarea>
+              <button id="AddProjectButton">Add Project</button>
+            <button id="CancelButton">Cancel</button>
+          </div>
+    
+          <div class="IsEmptyModal">
+            <p>Field is empty</p>
+            <button id="FillFieldButton">Ok</button>
+          </div>
