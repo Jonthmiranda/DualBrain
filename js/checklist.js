@@ -5,7 +5,7 @@
 
             <div class="AddChecklistModal">
                 <h4>Add Checklist</h4>
-                <textarea type="text" id="Task" name="Task" placeholder="Type the task"></textarea>
+                <textarea type="text" id="Tasks" name="Tasks" placeholder="Type the task"></textarea>
            
                 <button id="AddChecklistButton">Add Checklist</button>
                 <button id="CancelButton">Cancel</button>
