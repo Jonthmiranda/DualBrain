@@ -154,7 +154,7 @@ footer {
     cursor: pointer;
 }
 
-/*MODAL ADD PROJECT*/
+/*modal add project*/
 .AddProjectModal {
     background-color: #F4F4F4;
     border-radius: 25px;
@@ -243,7 +243,7 @@ footer {
     cursor: pointer;
 }
 
-/*MODAL ADD CHECKLIST*/
+/*modal add checklist*/
 .AddChecklistModal {
     background-color: #F4F4F4;
     border-radius: 25px;
@@ -340,6 +340,50 @@ footer {
 #cadNote:hover {
     background-color: #d6d4d4;
     cursor: pointer;
+}
+
+/*modal add notes*/
+.AddNotesModal {
+    background-color: #F4F4F4;
+    border-radius: 25px;
+    width: 50%;
+    height: 50%;
+    max-width: 300px;
+    max-height: 500px;
+    box-shadow: 0px 4px 30px 5px black;
+    align-items: center;
+    justify-content: center;
+    display: none; /*MUDAR PARA NONE*/
+    flex-direction: column;
+    z-index: 1;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.AddNotesModal textarea {
+    border-radius: 10px;
+    border: 0;
+    width: 79%;
+    height: 15%;
+    margin-top: 15px;
+}
+
+#AddNotesButton {
+    border-radius: 10px;
+    color: black;
+    background-color: #8dffaf;
+    cursor: pointer;
+    height: 9%;
+    width: 79%;
+    border: 0;
+    margin-top: 8%;
+}
+
+#AddNotesButton:hover {
+    background-color: #60fc8e;
 }
 
 /*CHAT IA*/
