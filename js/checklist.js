@@ -5,12 +5,11 @@
 
             <div class="AddChecklistModal">
                 <h4>Add Checklist</h4>
-                <p class="TitleTask">Type the Task:</p>
-                <textarea type="text" id="Task" name="Task"></textarea>
-                
+                <textarea type="text" id="Task" name="Task" placeholder="Type the task"></textarea>
+           
                 <button id="AddChecklistButton">Add Checklist</button>
                 <button id="CancelButton">Cancel</button>
-
+           </div>
                 <div class="IsEmptyModal">
                     <p>Field is empty</p>
                     <button id="FillFieldButton">Ok</button>
