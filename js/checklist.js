@@ -10,7 +10,14 @@
                 <button id="AddChecklistButton">Add Checklist</button>
                 <button id="CancelButton">Cancel</button>
            </div>
+  
                 <div class="IsEmptyModal">
                     <p>Field is empty</p>
                     <button id="FillFieldButton">Ok</button>
+                </div>
+
+<div class="ConfirmDeleteModal">
+                    <p>Are you sure you want to delete?</p>
+                    <button id="ConfirmDelete">Yes</button>
+                    <button id="CancelButton">Cancel</button>
                 </div>
