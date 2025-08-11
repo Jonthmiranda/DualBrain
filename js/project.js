@@ -18,7 +18,7 @@
             <h4>Add Project</h4>
             <textarea type="text" id="Name" name="Name" placeholder="Name"></textarea>
             <textarea type="text" id="Description" name="Description" placeholder="Description"></textarea>
-            <textarea type="text" id="Staks" name="Staks" placeholder="Technology"></textarea>
+            <textarea type="text" id="Stacks" name="Stacks" placeholder="Technology"></textarea>
               <button id="AddProjectButton">Add Project</button>
             <button id="CancelButton">Cancel</button>
           </div>
