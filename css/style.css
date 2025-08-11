@@ -467,6 +467,50 @@ footer {
     cursor: pointer;
 }
 
+/*modal add scrum*/
+.AddScrumModal {
+    background-color: #F4F4F4;
+    border-radius: 25px;
+    width: 50%;
+    height: 50%;
+    max-width: 300px;
+    max-height: 500px;
+    box-shadow: 0px 4px 30px 5px black;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.AddScrumModal textarea{
+    border-radius: 10px;
+    border: 0;
+    width: 79%;
+    height: 15%;
+    margin-top: 15px;
+}
+
+#AddScrumButton {
+    border-radius: 10px;
+    color: black;
+    background-color: #8dffaf;
+    cursor: pointer;
+    height: 9%;
+    width: 79%;
+    border: 0;
+    margin-top: 8%;
+}
+
+#AddScrumButton:hover {
+    background-color: #60fc8e;
+}
+
 /*MODALS GERAL*/
 
 /*GERAL ITENS*/
