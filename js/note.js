@@ -19,6 +19,15 @@
                     <button id="FillFieldButton">Ok</button>
                 </div>
 
+<div class="NoteModal">
+                    <h4>Titulo da nota</h4>
+                    <p>Texto da nota</p>
+                    <button id="Close">Close</button>
+                    <button id="Delete">Delete</button>
+                    <button id="Edit">Edit</button>
+                </div>
+
+
 <div class="ConfirmDeleteModal">
                     <p>Are you sure you want to delete?</p>
                     <button id="ConfirmDelete">Yes</button>
