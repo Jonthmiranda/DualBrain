@@ -88,7 +88,7 @@ request.onupgradeneeded = function (event) {
 //PROJECT SCREEN
 
 //READ PROJECT
-async function SelectProjects() {
+export async function SelectProjects() {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Projects", "readonly");
@@ -107,7 +107,7 @@ async function SelectProjects() {
                 DateEnd: proj.DateEnd
             }));
 
-            console.log("Projetos encontrados:", results);//enviar para projeto.js
+            resolve(results); //enviar para projeto.js
         };
 
         request.onerror = () => {

@@ -48,10 +48,16 @@ menu.addEventListener("click", function() {
 
 var EndProject = document.getElementById("EndProject");
 var DeleteProject = document.getElementById("DeleteProject");
+
+//CHANGE PROJECT BUTTON
+var ChangeProject = document.getElementById("ChangeProject");
+
+ChangeProject.addEventListener("click", function(){
+    ProjectScreen(nav);
+})
+
 var Help = document.getElementById("Help");
 
 
-
-
 //WHEN INICIALIZED CALL THE PROJECT SCREEN
-//ProjectScreen(nav);
+ProjectScreen(nav);

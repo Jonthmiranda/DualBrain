@@ -1,4 +1,12 @@
-export function ProjectScreen(nav) {
+import { SelectProjects } from './db.js';
+
+export async function ProjectScreen(nav) {
+  
+  //finalizar depois do insert
+  const results = SelectProjects();
+
+  console.log(results);
+
   document.querySelector("section").innerHTML = `
         <div class="ProjectList">
     <button>
@@ -39,4 +47,6 @@ export function ProjectScreen(nav) {
     
   nav.style.display = "none";
 }
+
+var cadProject = document.selec cadProject
 
