@@ -1,4 +1,6 @@
-<div class="ProjectList">
+export function ProjectScreen(nav) {
+  document.querySelector("section").innerHTML = `
+        <div class="ProjectList">
     <button>
         <span class="title">Tarefa 1</span>
         <span class="description">Hoje às 14h</span>
@@ -33,3 +35,8 @@
                     <button id="ConfirmDelete">Yes</button>
                     <button id="CancelButton">Cancel</button>
                 </div>
+        `;
+    
+  nav.style.display = "none";
+}
+
