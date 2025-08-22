@@ -140,8 +140,14 @@ footer {
     cursor: pointer;
 }
 
+.id {
+    font-weight: bold;
+}
+
 .title {
     font-weight: bold;
+    position: absolute;
+    margin-left: 5%;
 }
 
 .description {
@@ -594,9 +600,12 @@ footer {
     justify-content: center;
     display: none;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     z-index: 2;
     margin: 0 auto;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #FillFieldButton {

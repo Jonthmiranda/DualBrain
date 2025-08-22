@@ -1,4 +1,4 @@
-  //IMPORTS
+//IMPORTS
 import { SelectProjects } from './db.js';
 import { InsertProject } from './db.js';
 import { UpdateProject } from './db.js';
@@ -7,19 +7,7 @@ import { DeleteProject } from './db.js';
 export async function ProjectScreen(nav) {
 
   document.querySelector("section").innerHTML = `
-<div class="ProjectList">
-  <button>
-    <span class="title">Tarefa 1</span>
-    <span class="description">Hoje às 14h</span>
-  </button>
-  <button>
-    <span class="title">Tarefa 2</span>
-    <span class="description">Amanhã cedo</span>
-  </button>
-  <button>
-    <span class="title">Tarefa 3</span>
-    <span class="description">Em andamento</span>
-  </button>
+<div class="ProjectList" id="ProjectList">
 </div>
 <button id="cadProject"><img src="./assets/cad.png" alt="cadProject" class="buttonLogo"><span>Add Project</span></button>
 
@@ -27,7 +15,6 @@ export async function ProjectScreen(nav) {
   <h4>Add Project</h4>
   <textarea type="text" id="Name" name="Name" placeholder="Name"></textarea>
   <textarea type="text" id="Description" name="Description" placeholder="Description"></textarea>
-  <textarea type="text" id="Stacks" name="Stacks" placeholder="Technology"></textarea>
   <button id="AddProjectButton">Add Project</button>
   <button id="CancelButton">Cancel</button>
 </div>
@@ -43,82 +30,101 @@ export async function ProjectScreen(nav) {
   <button id="CancelButton">Cancel</button>
 </div>
         `;
-    
+
   nav.style.display = "none";
+  RenderProjects();
 
-//VARIABLES DIV PROJECT LIST
-var ProjectList  = document.querySelector(".ProjectList");
-var title = document.querySelector(".title");
-var description = document.querySelector(".description");
-var cadProject = document.getElementById("cadProject");
+  //VARIABLES DIV PROJECT LIST
+  var ProjectList = document.querySelector(".ProjectList");
+  var title = document.querySelector(".title");
+  var description = document.querySelector(".description");
+  var cadProject = document.getElementById("cadProject");
 
-//VARIABLES ADD PROJECT MODAL
-var AddProjectModal = document.querySelector(".AddProjectModal");
-var Name = document.getElementById("Name");
-var Description = document.getElementById("Description");
-var Stacks = document.getElementById("Stacks");
-var AddProjectButton = document.getElementById("AddProjectButton");
-var CancelButton = document.getElementById("CancelButton");
+  //VARIABLES ADD PROJECT MODAL
+  var AddProjectModal = document.querySelector(".AddProjectModal");
+  var Name = document.getElementById("Name");
+  var Description = document.getElementById("Description");
+  var AddProjectButton = document.getElementById("AddProjectButton");
+  var CancelButton = document.getElementById("CancelButton");
 
-//VARIABLES IS EMPTY MODAL
-var IsEmptyModal = document.querySelector(".IsEmptyModal");
-var FillFieldButton = document.getElementById("FillFieldButton");
+  //VARIABLES IS EMPTY MODAL
+  var IsEmptyModal = document.querySelector(".IsEmptyModal");
+  var FillFieldButton = document.getElementById("FillFieldButton");
 
-//VARIABLES CONFIRM DELETE MODAL
-var ConfirmDeleteModal = document.querySelector(".ConfirmDeleteModal");
-var ConfirmDelete = document.getElementById("ConfirmDelete");
-var CancelButton = document.getElementById("CancelButton");
+  //VARIABLES CONFIRM DELETE MODAL
+  var ConfirmDeleteModal = document.querySelector(".ConfirmDeleteModal");
+  var ConfirmDelete = document.getElementById("ConfirmDelete");
+  var CancelButton = document.getElementById("CancelButton");
 
-cadProject.addEventListener("click", function(){
-  AddProjectModal.style.display = "flex";
-})
+  cadProject.addEventListener("click", function () {
+    AddProjectModal.style.display = "flex";
+  })
 
-AddProjectButton.addEventListener("click", function(){
-  InsertProjectTratament();
-})
+  AddProjectButton.addEventListener("click", function () {
+    InsertProjectTratament();
+  })
 
-FillFieldButton.addEventListener("click", function(){
-  IsEmptyModal.style.display = "none";
-})
+  FillFieldButton.addEventListener("click", function () {
+    IsEmptyModal.style.display = "none";
+  })
 
-function InsertProjectTratament(){
-  let DateStart = new Date();
-  let year = DateStart.getFullYear();
-  let month = String(DateStart.getMonth() + 1).padStart(2, '0'); // Adiciona 1 porque os meses começam em 0
-  let day = String(DateStart.getDate()).padStart(2, '0');
-  DateStart = `${day}/${month}/${year}`;
-  let DateEnd = "undefined";
+  function InsertProjectTratament() {
+    let IsEmptyVerify = IsEmpty(Name.value, Description.value);
 
-  let IsEmptyVerify = IsEmpty(Name.value, Description.value, Stacks.value);
+    if (IsEmptyVerify === true) {
+      return;
+    }
 
-  if(IsEmptyVerify === true){
-    return;
+    InsertProject(Name.value, Description.value);
+
+    Clear();
+    AddProjectModal.style.display = "none";
+    location.reload();
   }
 
-  InsertProject(Name, Description, Stacks, DateStart, DateEnd);
+  CancelButton.addEventListener("click", function () {
+    Clear();
+    AddProjectModal.style.display = "none";
+  })
 
-  Clear();
-  AddProjectModal.style.display = "none";
-
-CancelButton.addEventListener("click", function(){
-  Clear();
-  AddProjectModal.style.display = "none";
-})
-}
-
-
-function IsEmpty(Name, Description, Stacks){
-  if (Name === "" || Description === "" || Stacks === "") {
-    IsEmptyModal.style.display = "flex";
-    return true; 
+  function IsEmpty(Name, Description) {
+    if (Name === "" || Description === "") {
+      IsEmptyModal.style.display = "flex";
+      return true;
+    }
+    return false;
   }
-  return false;
-}
 
-function Clear(){
-  document.getElementById("Name").value = "";
-  document.getElementById("Description").value = "";
-  document.getElementById("Stacks").value = "";
-}
+  function Clear() {
+    document.getElementById("Name").value = "";
+    document.getElementById("Description").value = "";
+  }
 
+  async function RenderProjects() {
+  const projects = await SelectProjects();
+  const container = document.getElementById("ProjectList");
+  container.innerHTML = "";
+
+  projects.forEach(proj => {
+    const button = document.createElement("button");
+
+    const spanId = document.createElement("span");
+    spanId.className = "id";
+    spanId.textContent = proj.Id;
+
+    const spanTitle = document.createElement("span");
+    spanTitle.className = "title";
+    spanTitle.textContent = proj.Name;
+
+    const spanDescription = document.createElement("span");
+    spanDescription.className = "description";
+    spanDescription.textContent = proj.Description;
+
+    button.appendChild(spanId);
+    button.appendChild(spanTitle);
+    button.appendChild(spanDescription);
+
+    container.appendChild(button);
+    })
+  }
 }

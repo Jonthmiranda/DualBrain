@@ -39,9 +39,6 @@ request.onupgradeneeded = function (event) {
 
         projectStore.createIndex("Name", "Name", { unique: false });
         projectStore.createIndex("Description", "Description", { unique: false });
-        projectStore.createIndex("Stacks", "Stacks", { unique: false });
-        projectStore.createIndex("DateStart", "DateStart", { unique: false });
-        projectStore.createIndex("DateEnd", "DateEnd", { unique: false });
     }
 
     //create table checklist
@@ -95,42 +92,38 @@ export async function SelectProjects() {
         const store = tx.objectStore("Projects");
         const request = store.getAll();
 
-        request.onsuccess = () => {
-            const projects = request.result;
+        const projects = await new Promise((resolve, reject) => {
+            request.onsuccess = () => {
+                const result = request.result.map(proj => ({
+                    Id: proj.Id,
+                    Name: proj.Name,
+                    Description: proj.Description,
+                }));
+                resolve(result);
+            };
 
-            const results = projects.map(proj => ({
-                Id: proj.Id,
-                Name: proj.Name,
-                Description: proj.Description,
-                Stacks: proj.Stacks,
-                DateStart: proj.DateStart,
-                DateEnd: proj.DateEnd
-            }));
+            request.onerror = () => {
+                reject("Error SelectProjects db.js.");
+            };
+        });
 
-            resolve(results); //enviar para projeto.js
-        };
+        return projects;
 
-        request.onerror = () => {
-            console.error("Erro ao buscar projetos.");//preparar tela de erro
-        };
     } finally {
         CloseDB();
     }
 }
 
 //UPDATE PROJECT
-export async function InsertProject(Name, Description, Stacks, DateStart, DateEnd) {
+export async function InsertProject(Name, Description, DateStart, DateEnd) {
     try {
         db = await OpenDB();
         const tx = db.transaction("Projects", "readwrite");
         const store = tx.objectStore("Projects");
 
         const Project = {
-            Name: Name.value,
-            Description: Description.value,
-            Stacks: Stacks.value,
-            DateStart: DateStart,
-            DateEnd: DateEnd
+            Name: Name,
+            Description: Description,
         };
 
         // Usando Promise para lidar com a operação assíncrona
@@ -138,7 +131,6 @@ export async function InsertProject(Name, Description, Stacks, DateStart, DateEn
             const addRequest = store.add(Project);
 
             addRequest.onsuccess = () => {
-                console.log("passou aqui");
                 resolve(addRequest.result); // Retorna o ID gerado
             };
 
@@ -161,7 +153,7 @@ export async function InsertProject(Name, Description, Stacks, DateStart, DateEn
 }
 
 //EDIT PROJECT
-export async function UpdateProject(Id, Name, Description, Stacks, DateStart, DateEnd) {
+export async function UpdateProject(Id, Name, Description, DateStart, DateEnd) {
     try {
         db = await OpenDB();
         const tx = db.transaction("Projects", "readwrite");
