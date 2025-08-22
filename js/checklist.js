@@ -1,3 +1,30 @@
+//IMPORTS
+import { SelectChecklist } from './db.js';
+import { InsertChecklist } from './db.js';
+import { UpdateChecklistCompleted } from './db.js';
+import { UpdateChecklist } from './db.js';
+import { DeleteChecklist } from './db.js';
+
+//VARIABLES DIV CHECKLIST LIST
+var ChecklistList  = document.querySelector(".ChecklistList");
+var cadChecklist = document.getElementById("cadChecklist");
+
+//VARIABLES ADD CHECKLIST MODAL
+var AddChecklistModal = document.querySelector(".AddChecklistModal");
+var Tasks = document.getElementById("Tasks");
+var AddChecklistButton = document.getElementById("AddChecklistButton");
+var CancelButton = document.getElementById("CancelButton");
+
+//VARIABLES IS EMPTY MODAL
+var IsEmptyModal = document.querySelector(".IsEmptyModal");
+var FillFieldButton = document.getElementById("FillFieldButton");
+
+//VARIABLES CONFIRM DELETE MODAL
+var ConfirmDeleteModal = document.querySelector(".ConfirmDeleteModal");
+var ConfirmDelete = document.getElementById("ConfirmDelete");
+var CancelButton = document.getElementById("CancelButton");
+
+
 export function ChecklistScreen() {
     document.querySelector("section").innerHTML = `
 <ul class="ChecklistList">

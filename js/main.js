@@ -1,44 +1,51 @@
+//IMPORTS
 import { ProjectScreen } from './project.js';
 import { ChecklistScreen } from './checklist.js';
 import { IAScreen } from './ia.js';
 import { NoteScreen } from './note.js';
 import { ScrumScreen } from './scrum.js';
 
+//VARIAVEIS TAGS
 var nav = document.querySelector("nav");
 
-//CHECKLIST BUTTON
+//VARIAVEIS NAV BUTTONS
 var checklist = document.getElementById("checklist");
+var notes = document.getElementById("notes");
+var ia = document.getElementById("ia");
+var scrum = document.getElementById("scrum");
+var menu = document.getElementById("menu");
+var EndProject = document.getElementById("EndProject");
+var DeleteProject = document.getElementById("DeleteProject");
+var ChangeProject = document.getElementById("ChangeProject");
+var Help = document.getElementById("Help");
 
+//VARIAVEIS NAV DIVS
+var MenuContent = document.querySelector(".MenuContent");
+
+//MUDANÇAS DE TELAS EVENTS
 checklist.addEventListener("click", function(){
     ChecklistScreen();
 })
-
-//NOTES BUTTON
-var notes = document.getElementById("notes");
 
 notes.addEventListener("click", function(){
     NoteScreen();
 })
 
-//IA BUTTON
-var ia = document.getElementById("ia");
-
 ia.addEventListener("click", function(){
     IAScreen();
 })
-
-//SCRUM BUTTON
-var scrum = document.getElementById("scrum");
 
 scrum.addEventListener("click", function(){
     ScrumScreen();
 })
 
-//MENU BUTTON
-var menu = document.getElementById("menu");
+ChangeProject.addEventListener("click", function(){
+    ProjectScreen(nav);
+})
 
+//DIV MENU EVENT
 menu.addEventListener("click", function() {
-    var MenuContent = document.querySelector(".MenuContent");
+    
     if (MenuContent.style.display === "none"){
         MenuContent.style.display = "block";
     }else{
@@ -46,18 +53,5 @@ menu.addEventListener("click", function() {
     }
 })
 
-var EndProject = document.getElementById("EndProject");
-var DeleteProject = document.getElementById("DeleteProject");
-
-//CHANGE PROJECT BUTTON
-var ChangeProject = document.getElementById("ChangeProject");
-
-ChangeProject.addEventListener("click", function(){
-    ProjectScreen(nav);
-})
-
-var Help = document.getElementById("Help");
-
-
-//WHEN INICIALIZED CALL THE PROJECT SCREEN
+//PRIMEIRA TELA
 ProjectScreen(nav);

@@ -1,3 +1,36 @@
+//IMPORTS
+import { SelectNotes } from './db.js';
+import { InsertNote } from './db.js';
+import { UpdateNote } from './db.js';
+import { DeleteNote } from './db.js';
+
+//VARIABLES NOTE LIST
+var noteList  = document.querySelector(".noteList");
+var note = document.getElementById("note");
+var cadNote = document.getElementById("cadNote");
+
+//VARIABLES ADD NOTES MODAL
+var AddNotesModal = document.querySelector(".AddNotesModal");
+var Title = document.getElementById("Title");
+var Text = document.getElementById("Text");
+var AddNotesButton = document.getElementById("Stacks");
+var CancelButton = document.getElementById("CancelButton");
+
+//VARIABLES IS EMPTY MODAL
+var IsEmptyModal = document.querySelector(".IsEmptyModal");
+var FillFieldButton = document.getElementById("FillFieldButton");
+
+//VARIABLES NOTE MODAL
+var NoteModal = document.querySelector(".NoteModal");
+var Close = document.getElementById("Close");
+var Delete = document.getElementById("Delete");
+var Edit = document.getElementById("Edit");
+
+//VARIABLES CONFIRM DELETE MODAL
+var ConfirmDeleteModal = document.querySelector(".ConfirmDeleteModal");
+var ConfirmDelete = document.getElementById("ConfirmDelete");
+var CancelButton = document.getElementById("CancelButton");
+
 export function NoteScreen() {
     document.querySelector("section").innerHTML = `
 <div class="noteList">

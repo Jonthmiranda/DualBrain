@@ -119,16 +119,16 @@ export async function SelectProjects() {
 }
 
 //UPDATE PROJECT
-async function InsertProject(Name, Description, Stacks, DateStart, DateEnd) {
+export async function InsertProject(Name, Description, Stacks, DateStart, DateEnd) {
     try {
         db = await OpenDB();
         const tx = db.transaction("Projects", "readwrite");
         const store = tx.objectStore("Projects");
 
         const Project = {
-            Name: Name,
-            Description: Description,
-            Stacks: Stacks,
+            Name: Name.value,
+            Description: Description.value,
+            Stacks: Stacks.value,
             DateStart: DateStart,
             DateEnd: DateEnd
         };
@@ -147,7 +147,7 @@ async function InsertProject(Name, Description, Stacks, DateStart, DateEnd) {
             };
         });
 
-        // Agora podemos await pois estamos no contexto async
+        // Agora podemos await pois estamos no contexto export async
         await InsertTemplateChecklist(ProjectId);
         console.log(`Projeto inserido com sucesso! ID: ${ProjectId}`);
         return ProjectId;
@@ -161,7 +161,7 @@ async function InsertProject(Name, Description, Stacks, DateStart, DateEnd) {
 }
 
 //EDIT PROJECT
-async function UpdateProject(Id, Name, Description, Stacks, DateStart, DateEnd) {
+export async function UpdateProject(Id, Name, Description, Stacks, DateStart, DateEnd) {
     try {
         db = await OpenDB();
         const tx = db.transaction("Projects", "readwrite");
@@ -194,7 +194,7 @@ async function UpdateProject(Id, Name, Description, Stacks, DateStart, DateEnd) 
 
 //DELETE PROJECT
 //DELETE FROM Projects WHERE ID = X;
-async function DeleteProject(Id) {
+export async function DeleteProject(Id) {
     try {
         db = await OpenDB();
         const tx = db.transaction("Projects", "readwrite");
@@ -222,7 +222,7 @@ async function DeleteProject(Id) {
 }
 
 //DELETE ALL DEPENDENCIES
-async function DeleteDependencies(db, storeName, ProjectId) {
+export async function DeleteDependencies(db, storeName, ProjectId) {
     return new Promise((resolve, reject) => {
         const tx = db.transaction(storeName, "readwrite");
         const store = tx.objectStore(storeName);
@@ -259,7 +259,7 @@ async function DeleteDependencies(db, storeName, ProjectId) {
 
 //READ CHECKLIST
 //SELECT Id, Step, Tasks, Completed FROM Checklists WHERE ProjectId = x
-async function SelectChecklist(ProjectId) {
+export async function SelectChecklist(ProjectId) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Checklists", "readonly");
@@ -290,7 +290,7 @@ async function SelectChecklist(ProjectId) {
 
 //INSERT TEMPLATE CHECKLIST
 //INSERT INTO Checklists (ProjectId, Step, Tasks, Completed) VALUES (x, x, x, Null)
-async function InsertTemplateChecklist(ProjectId) {
+export async function InsertTemplateChecklist(ProjectId) {
     try {
         db = await OpenDB();
         const tx = db.transaction("Checklists", "readwrite");
@@ -348,7 +348,7 @@ async function InsertTemplateChecklist(ProjectId) {
 
 //INSERT CHECKLIST
 //INSERT INTO Checklists (ProjectId, Step, Tasks, Completed) VALUES (x, x, x, Null)
-async function InsertChecklist(ProjectId, Step, Tasks) {
+export async function InsertChecklist(ProjectId, Step, Tasks) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Checklists", "readwrite");
@@ -377,7 +377,7 @@ async function InsertChecklist(ProjectId, Step, Tasks) {
 
 //UPDATE CHECKED ITEM FROM CHECKLIST
 //UPDATE Checklists SET Completed = True WHERE Id = x
-async function UpdateChecklistCompleted(Id) {
+export async function UpdateChecklistCompleted(Id) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Checklists", "readwrite");
@@ -414,7 +414,7 @@ async function UpdateChecklistCompleted(Id) {
 
 //UPDATE CHECKLIST 
 //UPDATE Checklists SET Step = x, Tasks = x, Completed = x WHERE Id = x;
-async function UpdateChecklist(Id, Step, Tasks, Completed) {
+export async function UpdateChecklist(Id, Step, Tasks, Completed) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Checklists", "readwrite");
@@ -453,7 +453,7 @@ async function UpdateChecklist(Id, Step, Tasks, Completed) {
 
 //DELETE CHECKLIST
 //DELETE FROM Checklists WHERE Id = x;
-async function DeleteChecklist(Id) {
+export async function DeleteChecklist(Id) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Checklists", "readwrite");
@@ -477,7 +477,7 @@ async function DeleteChecklist(Id) {
 
 //SELECT NOTES
 //SELECT Title, Text, Date FROM Notes WHERE ProjectId = x
-async function SelectNotes(ProjectId) {
+export async function SelectNotes(ProjectId) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Notes", "readonly");
@@ -508,7 +508,7 @@ async function SelectNotes(ProjectId) {
 
 //INSERT NOTE
 //INSERT INTO Notes (ProjectId, Title, Text, Date) VALUES (x, x, x, x)
-async function InsertNote(ProjectId, Title, Text, Date) {
+export async function InsertNote(ProjectId, Title, Text, Date) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Notes", "readwrite");
@@ -537,7 +537,7 @@ async function InsertNote(ProjectId, Title, Text, Date) {
 
 //UPDATE NOTE
 //UPDATE Notes SET Title = x, Text = x, Date = x WHERE Id = x
-async function UpdateNote(Id, Title, Text, Date) {
+export async function UpdateNote(Id, Title, Text, Date) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Notes", "readwrite");
@@ -575,7 +575,7 @@ async function UpdateNote(Id, Title, Text, Date) {
 
 //DELETE NOTE
 //DELETE FROM Notes WHERE Id = x
-async function DeleteNote(Id) {
+export async function DeleteNote(Id) {
     Id = 1;
     try {
         const db = await OpenDB();
@@ -600,7 +600,7 @@ async function DeleteNote(Id) {
 
 //SELECT SCRUMS
 //SELECT Date, Yesterday, Today, Locks FROM Scrums WHERE ProjectId = x
-async function SelectScrums(ProjectId) {
+export async function SelectScrums(ProjectId) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Scrums", "readonly");
@@ -631,7 +631,7 @@ async function SelectScrums(ProjectId) {
 
 //INSERT Scrum
 //INSERT INTO Scrum (ProjectId, Date, Yesterday, Today, Locks) VALUES (x, x, x, x, x)
-async function InsertScrum(ProjectId, Date, Yesterday, Today, Locks) {
+export async function InsertScrum(ProjectId, Date, Yesterday, Today, Locks) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Scrums", "readwrite");
@@ -663,7 +663,7 @@ async function InsertScrum(ProjectId, Date, Yesterday, Today, Locks) {
 
 //SELECT IA HISTORIC
 //SELECT Role, Content, Timestamp FROM IA WHERE ProjectId = X ODER BY Id
-async function SelectIAHistoric(ProjectId) {
+export async function SelectIAHistoric(ProjectId) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("IA", "readonly");
@@ -701,7 +701,7 @@ async function SelectIAHistoric(ProjectId) {
 
 //INSERT IA MSG
 //INSERT INTO IA (ProjectId, Role, Content, Timestamp) VALUES (x, x, x, x)
-async function InsertIAmsg(ProjectId, Role, Content, Timestamp) {
+export async function InsertIAmsg(ProjectId, Role, Content, Timestamp) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("IA", "readwrite");

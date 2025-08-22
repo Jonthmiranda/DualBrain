@@ -1,3 +1,22 @@
+//IMPORTS
+import { SelectScrums } from './db.js';
+import { InsertScrum } from './db.js';
+
+//VARIABLES SCRUM LIST
+var ScrumList = document.querySelector(".ScrumList");
+var Date = document.querySelector(".Date");
+
+//VARIABLES ADD SCRUM MODAL
+var AddScrumModal = document.querySelector(".AddScrumModal");
+var Yesterday = document.getElementById("Yesterday");
+var Today = document.getElementById("Today");
+var Locks = document.getElementById("Locks");
+var AddScrumButton = document.getElementById("AddScrumButton");
+
+//VARIABLES IS EMPTY MODAL
+var IsEmptyModal = document.querySelector(".IsEmptyModal");
+var FillFieldButton = document.getElementById("FillFieldButton");
+
 export function ScrumScreen() {
     document.querySelector("section").innerHTML = `
 <div class="ScrumList">
