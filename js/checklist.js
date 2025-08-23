@@ -25,7 +25,8 @@ var ConfirmDelete = document.getElementById("ConfirmDelete");
 var CancelButton = document.getElementById("CancelButton");
 
 
-export function ChecklistScreen() {
+export function ChecklistScreen(id) {
+    container.innerHTML = "";
     document.querySelector("section").innerHTML = `
 <ul class="ChecklistList">
                 <li><input type="checkbox" id="item1"><label for="item1">Criar layout</label></li>
