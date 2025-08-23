@@ -119,6 +119,5 @@ export async function ProjectScreen(nav) {
     }
     container.appendChild(button);
     })
-  }  
-})
+  }
 }
