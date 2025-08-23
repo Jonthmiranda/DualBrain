@@ -50,4 +50,7 @@ export function ChecklistScreen(id) {
                     <button id="ConfirmDelete">Yes</button>
                     <button id="CancelButton">Cancel</button>
                 </div>`;
+
+    AddProjectButton.style.display = "none";
+    nav.style.display = "flex";
 }
