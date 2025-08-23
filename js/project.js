@@ -116,6 +116,7 @@ export async function ProjectScreen(nav) {
 
     button.addEventListener("click", function () {
       ChecklistScreen(proj.Id);
+      container.innerHTML = "";
     })
     container.appendChild(button);
     })
