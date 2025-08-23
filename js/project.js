@@ -3,9 +3,10 @@ import { SelectProjects } from './db.js';
 import { InsertProject } from './db.js';
 import { ChecklistScreen } from './checklist.js';
 
-export async function ProjectScreen(nav) {
+export async function ProjectScreen() {
 
   document.querySelector("section").innerHTML = `
+<section>
 <div class="ProjectList" id="ProjectList">
 </div>
 <button id="cadProject"><img src="./assets/cad.png" alt="cadProject" class="buttonLogo"><span>Add Project</span></button>
@@ -22,9 +23,9 @@ export async function ProjectScreen(nav) {
   <p>Field is empty</p>
   <button id="FillFieldButton">Ok</button>
 </div>
+</section>
         `;
 
-  nav.style.display = "none";
   RenderProjects();
 
   //VARIABLES DIV PROJECT LIST
