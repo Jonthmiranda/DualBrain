@@ -119,7 +119,6 @@ export async function ProjectScreen(nav) {
   }  
 })
  button.addEventListener("click", function () {
-   console.log("clicado no projeto", id);
    ChecklistScreen(id);
  }
 }
