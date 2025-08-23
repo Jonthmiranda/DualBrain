@@ -27,9 +27,12 @@ var CancelButton = document.getElementById("CancelButton");
 
 export function ChecklistScreen(id) {
     document.querySelector("section").innerHTML = `
+ <section>
 <ul class="ChecklistList">
+  
                 <li><input type="checkbox" id="item1"><label for="item1">Criar layout</label></li>
             </ul>
+            
             <button id="cadChecklist"><img src="./assets/cad.png" alt="cadChecklist" class="buttonLogo"><span>Add Checklist</span></button>
 
             <div class="AddChecklistModal">
@@ -49,7 +52,22 @@ export function ChecklistScreen(id) {
                     <p>Are you sure you want to delete?</p>
                     <button id="ConfirmDelete">Yes</button>
                     <button id="CancelButton">Cancel</button>
-                </div>`;
+                </div>
+
+        </section>
+        <nav>
+            <button id="checklist"><img src="./assets/checklist.png" alt="Checklist"class="buttonLogo"><span>Checklist</span></button>
+            <button id="notes"><img src="./assets/notes.png" alt="Notes" class="buttonLogo"><span>Notes</span></button>
+            <button id="ia"><img src="./assets/IA.png" alt="IA" class="buttonLogo"><span>IA</span></button>
+            <button id="scrum"><img src="./assets/scrum.png" alt="Scrum" class="buttonLogo"><span>Scrum</span></button>
+            <button id="menu"><img src="./assets/menu.png" alt="Menu" class="buttonLogo"></button>
+            <div class="MenuContent">
+                <button id="EndProject">Finalize</button>
+                <button id="DeleteProject">Delete</button>
+                <button id="ChangeProject">Change</button>
+                <button id="Help">Help</button>
+            </div>
+        </nav>`;
 
     AddProjectButton.style.display = "none";
     nav.style.display = "flex";
