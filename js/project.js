@@ -1,8 +1,7 @@
 //IMPORTS
 import { SelectProjects } from './db.js';
 import { InsertProject } from './db.js';
-import { UpdateProject } from './db.js';
-import { DeleteProject } from './db.js';
+import { ChecklistScreen } from './checklist.js';
 
 export async function ProjectScreen(nav) {
 
@@ -30,6 +29,7 @@ export async function ProjectScreen(nav) {
 
   //VARIABLES DIV PROJECT LIST
   var ProjectList = document.querySelector(".ProjectList");
+  var id = document.querySelector(".id");
   var title = document.querySelector(".title");
   var description = document.querySelector(".description");
   var cadProject = document.getElementById("cadProject");
@@ -96,6 +96,7 @@ export async function ProjectScreen(nav) {
 
   projects.forEach(proj => {
     const button = document.createElement("button");
+    button.className = "button";
 
     const spanId = document.createElement("span");
     spanId.className = "id";
@@ -115,5 +116,10 @@ export async function ProjectScreen(nav) {
 
     container.appendChild(button);
     })
-  }
+  }  
+})
+ button.addEventListener("click", function () {
+   console.log("clicado no projeto", id);
+   ChecklistScreen(id);
+ }
 }
