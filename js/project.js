@@ -23,12 +23,6 @@ export async function ProjectScreen(nav) {
   <p>Field is empty</p>
   <button id="FillFieldButton">Ok</button>
 </div>
-
-<div class="ConfirmDeleteModal">
-  <p>Are you sure you want to delete?</p>
-  <button id="ConfirmDelete">Yes</button>
-  <button id="CancelButton">Cancel</button>
-</div>
         `;
 
   nav.style.display = "none";
@@ -50,11 +44,6 @@ export async function ProjectScreen(nav) {
   //VARIABLES IS EMPTY MODAL
   var IsEmptyModal = document.querySelector(".IsEmptyModal");
   var FillFieldButton = document.getElementById("FillFieldButton");
-
-  //VARIABLES CONFIRM DELETE MODAL
-  var ConfirmDeleteModal = document.querySelector(".ConfirmDeleteModal");
-  var ConfirmDelete = document.getElementById("ConfirmDelete");
-  var CancelButton = document.getElementById("CancelButton");
 
   cadProject.addEventListener("click", function () {
     AddProjectModal.style.display = "flex";
