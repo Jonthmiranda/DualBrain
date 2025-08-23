@@ -57,10 +57,6 @@ export async function ProjectScreen(nav) {
     IsEmptyModal.style.display = "none";
   })
 
-  button.addEventListener("click", function () {
-   ChecklistScreen(id);
-  }
-
   function InsertProjectTratament() {
     let IsEmptyVerify = IsEmpty(Name.value, Description.value);
 
@@ -118,6 +114,9 @@ export async function ProjectScreen(nav) {
     button.appendChild(spanTitle);
     button.appendChild(spanDescription);
 
+    button.addEventListener("click", function () {
+      ChecklistScreen(id);
+    }
     container.appendChild(button);
     })
   }  
