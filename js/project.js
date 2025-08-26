@@ -5,26 +5,30 @@ import { ChecklistScreen } from './checklist.js';
 
 export async function ProjectScreen() {
 
-  document.querySelector("section").innerHTML = `
+  document.querySelector("main").innerHTML = `
 <section>
-<div class="ProjectList" id="ProjectList">
-</div>
-<button id="cadProject"><img src="./assets/cad.png" alt="cadProject" class="buttonLogo"><span>Add Project</span></button>
+  <div class="ProjectList" id="ProjectList">
+  <!--Conteudo dos projetos-->
 
-<div class="AddProjectModal">
-  <h4>Add Project</h4>
-  <textarea type="text" id="Name" name="Name" placeholder="Name"></textarea>
-  <textarea type="text" id="Description" name="Description" placeholder="Description"></textarea>
-  <button id="AddProjectButton">Add Project</button>
-  <button id="CancelButton">Cancel</button>
-</div>
+  </div>
+  
+  <button id="cadProject"><img src="./assets/cad.png" alt="cadProject" class="buttonLogo"><span>Add Project</span></button>
+
+  <div class="AddProjectModal">
+    <h4>Add Project</h4>
+    <textarea type="text" id="Name" name="Name" placeholder="Name"></textarea>
+    <textarea type="text" id="Description" name="Description" placeholder="Description"></textarea>
     
-<div class="IsEmptyModal">
-  <p>Field is empty</p>
-  <button id="FillFieldButton">Ok</button>
-</div>
+    <button id="AddProjectButton">Add Project</button>
+    <button id="CancelButton">Cancel</button>
+  </div>
+    
+  <div class="IsEmptyModal">
+    <p>Field is empty</p>
+    <button id="FillFieldButton">Ok</button>
+  </div>
 </section>
-        `;
+`;
 
   RenderProjects();
 
@@ -91,35 +95,37 @@ export async function ProjectScreen() {
   }
 
   async function RenderProjects() {
-  const projects = await SelectProjects();
-  const container = document.getElementById("ProjectList");
-  container.innerHTML = "";
+    const projects = await SelectProjects();
+    const container = document.getElementById("ProjectList");
+    container.innerHTML = "";
 
-  projects.forEach(proj => {
-    const button = document.createElement("button");
-    button.className = "button";
+    projects.forEach(proj => {
+      const button = document.createElement("button");
+      button.className = "button";
 
-    const spanId = document.createElement("span");
-    spanId.className = "id";
-    spanId.textContent = proj.Id;
+      const spanId = document.createElement("span");
+      spanId.className = "id";
+      spanId.textContent = proj.Id;
 
-    const spanTitle = document.createElement("span");
-    spanTitle.className = "title";
-    spanTitle.textContent = proj.Name;
+      const spanTitle = document.createElement("span");
+      spanTitle.className = "title";
+      spanTitle.textContent = proj.Name;
 
-    const spanDescription = document.createElement("span");
-    spanDescription.className = "description";
-    spanDescription.textContent = proj.Description;
+      const spanDescription = document.createElement("span");
+      spanDescription.className = "description";
+      spanDescription.textContent = proj.Description;
 
-    button.appendChild(spanId);
-    button.appendChild(spanTitle);
-    button.appendChild(spanDescription);
+      button.appendChild(spanId);
+      button.appendChild(spanTitle);
+      button.appendChild(spanDescription);
 
-    button.addEventListener("click", function () {
-      ChecklistScreen(proj.Id);
-      container.innerHTML = "";
-    })
-    container.appendChild(button);
+      button.addEventListener("click", function () {
+        ChecklistScreen(proj.Id);
+        container.innerHTML = "";
+      })
+      container.appendChild(button);
     })
   }
 }
+
+ProjectScreen();

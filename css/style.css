@@ -51,8 +51,8 @@ nav {
     width: 100%;
     display: flex;
     position: fixed;
-    /*display: none; /*somente quando ta na tela de escolha de projetos*/
 }
+
 nav button {
     color: black;
     background-color: #F4F4F4;

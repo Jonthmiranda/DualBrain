@@ -70,16 +70,6 @@ request.onupgradeneeded = function (event) {
         NotesStore.createIndex("Text", "Text", { unique: false });
         NotesStore.createIndex("Date", "Date", { unique: false });
     };
-
-    //create table IA
-    if (!db.objectStoreNames.contains("IA")) {
-        const IAStore = db.createObjectStore("IA", { keyPath: "Id", autoIncrement: true });
-
-        IAStore.createIndex("ProjectId", "ProjectId", { unique: false });
-        IAStore.createIndex("Role", "Role", { unique: false });
-        IAStore.createIndex("Content", "Content", { unique: false });
-        IAStore.createIndex("Timestamp", "Timestamp", { unique: false });
-    };
 }
 
 //PROJECT SCREEN
@@ -645,75 +635,6 @@ export async function InsertScrum(ProjectId, Date, Yesterday, Today, Locks) {
 
         request.onerror = () => {
             console.error("Erro ao inserir Scrum.");
-        };
-    } finally {
-        CloseDB();
-    }
-}
-
-//IA SCREEN
-
-//SELECT IA HISTORIC
-//SELECT Role, Content, Timestamp FROM IA WHERE ProjectId = X ODER BY Id
-export async function SelectIAHistoric(ProjectId) {
-    try {
-        const db = await OpenDB();
-        const tx = db.transaction("IA", "readonly");
-        const store = tx.objectStore("IA");
-        const index = store.index("ProjectId");
-
-        const request = index.getAll(ProjectId);
-
-        return await new Promise((resolve, reject) => {
-            request.onsuccess = () => {
-                const results = request.result;
-
-                results.sort((a, b) => a.Id - b.Id);
-
-                const filtered = results.map(item => ({
-                    Role: item.Role,
-                    Content: item.Content,
-                }));
-
-                resolve(filtered);
-            };
-
-            request.onerror = (event) => {
-                reject("Erro ao buscar mensagens IA: " + event.target.error);
-            };
-        });
-
-    } catch (error) {
-        console.error("Erro ao buscar IA por ProjectId ordenado por ID:", error);
-        throw error;
-    } finally {
-        CloseDB();
-    }
-}
-
-//INSERT IA MSG
-//INSERT INTO IA (ProjectId, Role, Content, Timestamp) VALUES (x, x, x, x)
-export async function InsertIAmsg(ProjectId, Role, Content, Timestamp) {
-    try {
-        const db = await OpenDB();
-        const tx = db.transaction("IA", "readwrite");
-        const store = tx.objectStore("IA");
-
-        const newMsg = {
-            ProjectId: ProjectId,
-            Role: Role,
-            Content: Content,
-            Timestamp: Timestamp,
-        };
-
-        const request = store.add(newMsg);
-
-        request.onsuccess = () => {
-            console.log("Msg inserida com sucesso!");
-        };
-
-        request.onerror = () => {
-            console.error("Erro ao inserir a mensagem.");
         };
     } finally {
         CloseDB();
