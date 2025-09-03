@@ -87,19 +87,19 @@ export function ChecklistScreen(id) {
 
     //MUDANÇAS DE TELAS EVENTS
     checklist.addEventListener("click", function () {
-        ChecklistScreen();
+        ChecklistScreen(id);
     })
 
     notes.addEventListener("click", function () {
-        NoteScreen();
+        NoteScreen(id);
     })
 
     scrum.addEventListener("click", function () {
-        ScrumScreen();
+        ScrumScreen(id);
     })
 
     ChangeProject.addEventListener("click", function () {
-        ProjectScreen();
+        ProjectScreen(id);
     })
 
     //DIV MENU EVENT
@@ -112,13 +112,58 @@ export function ChecklistScreen(id) {
         }
     })
 
+    //ADD CHECKLIST
+    cadChecklist.addEventListener("click", function () {
+        AddChecklistModal.style.display = "flex";
+    })
+
+    AddChecklistButton.addEventListener("click", function () {
+        InsertProjectTratament();
+    })
+
+    FillFieldButton.addEventListener("click", function () {
+        IsEmptyModal.style.display = "none";
+    })
+
+    function InsertProjectTratament() {
+        let IsEmptyVerify = IsEmpty(id, Tasks.value);
+
+        if (IsEmptyVerify === true) {
+            return;
+        }
+
+        InsertChecklist(Tasks.value);
+
+        Clear();
+        AddChecklistModal.style.display = "none";
+        //location.reload(); ele não pode recarregar a pagina
+    }
+
+    CancelButton.addEventListener("click", function () {
+        Clear();
+        AddChecklistModal.style.display = "none";
+    })
+
+    function IsEmpty(Tasks) {
+        if (Tasks === "") {
+            IsEmptyModal.style.display = "flex";
+            return true;
+        }
+        return false;
+    }
+
+    function Clear() {
+        document.getElementById("Tasks").value = "";
+    }
+
+
     async function RenderChecklist(id) {
-        
+
         const check = await SelectChecklist(id);
         const container = document.querySelector(".ChecklistList");
         container.innerHTML = "";
         checklist.style.backgroundColor = "#d6d4d4";
-        
+
         check.forEach(task => {
             const li = document.createElement("li");
 
@@ -136,4 +181,7 @@ export function ChecklistScreen(id) {
             container.appendChild(li);
         });
     }
+
+
+
 }

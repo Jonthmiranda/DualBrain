@@ -1,6 +1,6 @@
 let db = null;
 
-//OPEN DATABASE
+//OPEN DATABASE OK
 function OpenDB() {
     return new Promise((resolve, reject) => {
         if (db) {
@@ -20,7 +20,7 @@ function OpenDB() {
     });
 }
 
-//CLOSE DATABASE
+//CLOSE DATABASE OK
 function CloseDB() {
     if (db) {
         db.close();
@@ -29,7 +29,7 @@ function CloseDB() {
     }
 }
 
-//CREATE DATABASE INDEXEDBD
+//CREATE DATABASE INDEXEDBD OK
 const request = indexedDB.open("FokysPWA", 1); //DBName and version
 request.onupgradeneeded = function (event) {
     const db = event.target.result;
@@ -74,7 +74,7 @@ request.onupgradeneeded = function (event) {
 
 //PROJECT SCREEN
 
-//READ PROJECT
+//READ PROJECT OK
 export async function SelectProjects() {
     try {
         const db = await OpenDB();
@@ -239,7 +239,7 @@ export async function DeleteDependencies(db, storeName, ProjectId) {
 
 //CHECKLIST SCREEN
 
-//READ CHECKLIST
+//READ CHECKLIST OK
 //SELECT Id, Step, Tasks, Completed FROM Checklists WHERE ProjectId = x
 export async function SelectChecklist(ProjectId) {
     try {
@@ -276,7 +276,7 @@ export async function SelectChecklist(ProjectId) {
     }
 }
 
-//INSERT TEMPLATE CHECKLIST
+//INSERT TEMPLATE CHECKLIST OK
 //INSERT INTO Checklists (ProjectId, Step, Tasks, Completed) VALUES (x, x, x, Null)
 export async function InsertTemplateChecklist(ProjectId) {
     try {
@@ -336,7 +336,7 @@ export async function InsertTemplateChecklist(ProjectId) {
 
 //INSERT CHECKLIST
 //INSERT INTO Checklists (ProjectId, Step, Tasks, Completed) VALUES (x, x, x, Null)
-export async function InsertChecklist(ProjectId, Step, Tasks) {
+export async function InsertChecklist(ProjectId,Tasks) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Checklists", "readwrite");
@@ -344,7 +344,6 @@ export async function InsertChecklist(ProjectId, Step, Tasks) {
 
         const newChecklist = {
             ProjectId: ProjectId,
-            Step: Step,
             Tasks: Tasks,
             Completed: false
         };
