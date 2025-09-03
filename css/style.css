@@ -59,11 +59,15 @@ nav button {
     border-radius: 10px;
     border: 0px;
     height: 100%;
-    width: 25%;
+    width: 33.3%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#checklist {
+
 }
 
 nav button:hover {
@@ -227,10 +231,11 @@ footer {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 79.7%;
+    height: 80%;
     list-style: none;
     padding-left: 0;
     margin-left: 0;
+    overflow-y: auto;
 }
 
 .ChecklistList input[type="checkbox"] {
@@ -245,6 +250,20 @@ footer {
 
 .ChecklistList label:hover {
     cursor: pointer;
+}
+
+#block {
+color: black;
+    background-color: #F4F4F4;
+    border-radius: 10px;
+    border: 0;
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
 }
 
 #cadChecklist {

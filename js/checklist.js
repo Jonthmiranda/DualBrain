@@ -9,9 +9,10 @@ export function ChecklistScreen(id) {
     document.querySelector("main").innerHTML = `
     <section>
         <ul class="ChecklistList">
-            <li><input type="checkbox" id="item1"><label for="item1">Criar layout</label></li>
-        </ul>
             
+        </ul>
+        
+        <div id="block"></div>
         <button id="cadChecklist"><img src="./assets/cad.png" alt="cadChecklist" class="buttonLogo"><span>Add Checklist</span></button>
 
         <div class="AddChecklistModal">
@@ -112,11 +113,13 @@ export function ChecklistScreen(id) {
     })
 
     async function RenderChecklist(id) {
-        const checklist = await SelectChecklist(id);
+        
+        const check = await SelectChecklist(id);
         const container = document.querySelector(".ChecklistList");
         container.innerHTML = "";
-
-        checklist.forEach(task => {
+        checklist.style.backgroundColor = "#d6d4d4";
+        
+        check.forEach(task => {
             const li = document.createElement("li");
 
             const checkbox = document.createElement("input");

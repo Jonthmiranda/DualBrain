@@ -250,21 +250,27 @@ export async function SelectChecklist(ProjectId) {
         const range = IDBKeyRange.only(ProjectId);
         const request = index.getAll(range);
 
-        request.onsuccess = () => {
-            const checklists = request.result;
+        const results = await new Promise((resolve, reject) => {
+            request.onsuccess = () => {
+                const checklists = request.result;
 
-            const results = checklists.map(item => ({
-                Id: item.Id,
-                Step: item.Step,
-                Tasks: item.Tasks,
-                Completed: item.Completed
-            }));
-            console.log("Checklists encontrados:", results);
-        };
+                const mapped = checklists.map(item => ({
+                    Id: item.Id,
+                    Step: item.Step,
+                    Tasks: item.Tasks,
+                    Completed: item.Completed
+                }));
 
-        request.onerror = () => {
-            console.error("Erro ao buscar checklists.");
-        };
+                resolve(mapped);
+            };
+
+            request.onerror = () => {
+                reject("Erro ao buscar checklists.");
+            };
+        });
+
+        return results;
+
     } finally {
         CloseDB();
     }
