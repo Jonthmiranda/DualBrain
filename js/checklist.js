@@ -136,7 +136,7 @@ export function ChecklistScreen(id) {
 
         Clear();
         AddChecklistModal.style.display = "none";
-        //location.reload(); ele não pode recarregar a pagina
+        RenderChecklist(id);
     }
 
     CancelButton.addEventListener("click", function () {
