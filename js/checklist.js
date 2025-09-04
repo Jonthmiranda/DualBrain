@@ -6,8 +6,8 @@ import { UpdateChecklist } from './db.js';
 import { DeleteChecklist } from './db.js';
 import { DeleteProject } from './db.js';
 import { ProjectScreen } from './project.js';
-import { NoteScreen } from './project.js';
-import { ScrumScreen } from './project.js';
+import { NoteScreen } from './note.js';
+import { ScrumScreen } from './scrum.js';
 
 export function ChecklistScreen(ProjectId) {
     document.querySelector("main").innerHTML = `
