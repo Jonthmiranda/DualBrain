@@ -4,6 +4,7 @@ import { InsertChecklist } from './db.js';
 import { UpdateChecklistCompleted } from './db.js';
 import { UpdateChecklist } from './db.js';
 import { DeleteChecklist } from './db.js';
+import { DeleteProject } from './db.js';
 import { ProjectScreen } from './project.js';
 
 export function ChecklistScreen(ProjectId) {
@@ -99,7 +100,14 @@ export function ChecklistScreen(ProjectId) {
         ScrumScreen(ProjectId);
     })
 
+    //change project
     ChangeProject.addEventListener("click", function () {
+        ProjectScreen();
+    })
+
+    //delete project
+    DeleteProject.addEventListener("click", function () {
+        DeleteProject(ProjectId);
         ProjectScreen();
     })
 
