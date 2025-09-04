@@ -126,13 +126,13 @@ export function ChecklistScreen(id) {
     })
 
     function InsertProjectTratament() {
-        let IsEmptyVerify = IsEmpty(id, Tasks.value);
+        let IsEmptyVerify = IsEmpty(Tasks.value);
 
         if (IsEmptyVerify === true) {
             return;
         }
 
-        InsertChecklist(Tasks.value);
+        InsertChecklist(id, Tasks.value);
 
         Clear();
         AddChecklistModal.style.display = "none";
