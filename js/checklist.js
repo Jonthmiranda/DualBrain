@@ -6,6 +6,8 @@ import { UpdateChecklist } from './db.js';
 import { DeleteChecklist } from './db.js';
 import { DeleteProject } from './db.js';
 import { ProjectScreen } from './project.js';
+import { NoteScreen } from './project.js';
+import { ScrumScreen } from './project.js';
 
 export function ChecklistScreen(ProjectId) {
     document.querySelector("main").innerHTML = `
@@ -88,9 +90,6 @@ export function ChecklistScreen(ProjectId) {
     var MenuContent = document.querySelector(".MenuContent");
 
     //MUDANÇAS DE TELAS EVENTS
-    checklist.addEventListener("click", function () {
-        ChecklistScreen(ProjectId);
-    })
 
     notes.addEventListener("click", function () {
         NoteScreen(ProjectId);
@@ -127,14 +126,14 @@ export function ChecklistScreen(ProjectId) {
     })
 
     AddChecklistButton.addEventListener("click", function () {
-        InsertProjectTratament();
+        InsertChecklistTratament();
     })
 
     FillFieldButton.addEventListener("click", function () {
         IsEmptyModal.style.display = "none";
     })
 
-    function InsertProjectTratament() {
+    function InsertChecklistTratament() {
         let IsEmptyVerify = IsEmpty(Tasks.value);
 
         if (IsEmptyVerify === true) {
