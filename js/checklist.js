@@ -132,7 +132,7 @@ export function ChecklistScreen(ProjectId) {
             return;
         }
         const Step = "Other";
-        InsertChecklist(ProjectId, Tasks.value);
+        InsertChecklist(ProjectId, Step, Tasks.value);
 
         Clear();
         AddChecklistModal.style.display = "none";
