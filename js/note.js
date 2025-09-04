@@ -3,10 +3,10 @@ import { SelectNotes } from './db.js';
 import { InsertNote } from './db.js';
 import { UpdateNote } from './db.js';
 import { DeleteNote } from './db.js';
-import { DeleteProject } from '/db.js';
-import { ChecklistScreen } from '/checklist.js';
-import { ScrumScreen } from '/scrum.js';
-import { ProjectScreen } from '/project.js';
+import { DeleteProject } from './db.js';
+import { ChecklistScreen } from './checklist.js';
+import { ScrumScreen } from './scrum.js';
+import { ProjectScreen } from './project.js';
 
 export function NoteScreen(ProjectId) {
     document.querySelector("section").innerHTML = `
