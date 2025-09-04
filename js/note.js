@@ -94,20 +94,24 @@ var MenuContent = document.querySelector(".MenuContent");
 //MUDANÇAS DE TELAS EVENTS
     
 checklist.addEventListener("click", function () {
+    notes.style.backgroundColor = "#F4F4F4";
     ChecklistScreen(ProjectId);
 })
 
 scrum.addEventListener("click", function () {
+    notes.style.backgroundColor = "#F4F4F4";
     ScrumScreen(ProjectId);
 })
 
 //change project
 ChangeProject.addEventListener("click", function () {
+    notes.style.backgroundColor = "#F4F4F4";
     ProjectScreen();
 })
 
 //delete project
 DeleteProjectBt.addEventListener("click", function () {
+    notes.style.backgroundColor = "#F4F4F4";
     DeleteProject(ProjectId);
     ProjectScreen();
 })
