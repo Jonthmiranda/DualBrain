@@ -120,7 +120,7 @@ export async function ProjectScreen() {
       button.appendChild(spanDescription);
 
       button.addEventListener("click", function () {
-        ProjectId = proj.Id;
+        const ProjectId = proj.Id;
         ChecklistScreen(ProjectId);
         container.innerHTML = "";
       })
