@@ -43,7 +43,7 @@ export function ChecklistScreen(ProjectId) {
         <button id="menu"><img src="./assets/menu.png" alt="Menu" class="buttonLogo"></button>
         <div class="MenuContent">
             <button id="EndProject">Finalize</button>
-            <button id="DeleteProject">Delete</button>
+            <button id="DeleteProjectBt">Delete</button>
             <button id="ChangeProject">Change</button>
             <button id="Help">Help</button>
         </div>
@@ -80,7 +80,7 @@ export function ChecklistScreen(ProjectId) {
     var scrum = document.getElementById("scrum");
     var menu = document.getElementById("menu");
     var EndProject = document.getElementById("EndProject");
-    var DeleteProject = document.getElementById("DeleteProject");
+    var DeleteProjectBt = document.getElementById("DeleteProjectBt");
     var ChangeProject = document.getElementById("ChangeProject");
     var Help = document.getElementById("Help");
 
@@ -106,7 +106,7 @@ export function ChecklistScreen(ProjectId) {
     })
 
     //delete project
-    DeleteProject.addEventListener("click", function () {
+    DeleteProjectBt.addEventListener("click", function () {
         DeleteProject(ProjectId);
         ProjectScreen();
     })
