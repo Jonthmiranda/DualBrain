@@ -336,7 +336,7 @@ export async function InsertTemplateChecklist(ProjectId) {
 
 //INSERT CHECKLIST
 //INSERT INTO Checklists (ProjectId, Step, Tasks, Completed) VALUES (x, x, x, Null)
-export async function InsertChecklist(ProjectId,Tasks) {
+export async function InsertChecklist(ProjectId, Step, Tasks) {
     try {
         const db = await OpenDB();
         const tx = db.transaction("Checklists", "readwrite");
@@ -344,6 +344,7 @@ export async function InsertChecklist(ProjectId,Tasks) {
 
         const newChecklist = {
             ProjectId: ProjectId,
+            Step: Step,
             Tasks: Tasks,
             Completed: false
         };
