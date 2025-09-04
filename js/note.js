@@ -10,6 +10,7 @@ import { ProjectScreen } from './project.js';
 
 export function NoteScreen(ProjectId) {
     document.querySelector("section").innerHTML = `
+    <section>
 <div class="noteList">
     <button id="note">
         <h3>Título 1</h3>
@@ -44,7 +45,21 @@ export function NoteScreen(ProjectId) {
      <p>Are you sure you want to delete?</p>
      <button id="ConfirmDelete">Yes</button>
      <button id="CancelButton">Cancel</button>
-</div>`;
+</div>
+</section>
+     <nav>
+        <button id="checklist"><img src="./assets/checklist.png" alt="Checklist"class="buttonLogo"><span>Checklist</span></button>
+        <button id="notes"><img src="./assets/notes.png" alt="Notes" class="buttonLogo"><span>Notes</span></button>
+        <button id="scrum"><img src="./assets/scrum.png" alt="Scrum" class="buttonLogo"><span>Scrum</span></button>
+        <button id="menu"><img src="./assets/menu.png" alt="Menu" class="buttonLogo"></button>
+        <div class="MenuContent">
+            <button id="EndProject">Finalize</button>
+            <button id="DeleteProjectBt">Delete</button>
+            <button id="ChangeProject">Change</button>
+            <button id="Help">Help</button>
+        </div>
+    </nav>
+`;
     
 RenderNotes(ProjectId);
 
