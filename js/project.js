@@ -73,7 +73,7 @@ export async function ProjectScreen() {
 
     Clear();
     AddProjectModal.style.display = "none";
-    location.reload();
+    RenderProjects();
   }
 
   CancelButton.addEventListener("click", function () {
