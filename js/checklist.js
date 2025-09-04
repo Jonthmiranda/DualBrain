@@ -100,7 +100,7 @@ export function ChecklistScreen(ProjectId) {
     })
 
     ChangeProject.addEventListener("click", function () {
-        ProjectScreen(ProjectId);
+        ProjectScreen();
     })
 
     //DIV MENU EVENT
@@ -156,10 +156,6 @@ export function ChecklistScreen(ProjectId) {
     function Clear() {
         document.getElementById("Tasks").value = "";
     }
-
-    ChangeProject.addEventListener("click", function () {
-       ProjectScreen();
-    })
 
 
     async function RenderChecklist(ProjectId) {
