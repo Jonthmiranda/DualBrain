@@ -5,7 +5,7 @@ import { UpdateChecklistCompleted } from './db.js';
 import { UpdateChecklist } from './db.js';
 import { DeleteChecklist } from './db.js';
 
-export function ChecklistScreen(id) {
+export function ChecklistScreen(ProjectId) {
     document.querySelector("main").innerHTML = `
     <section>
         <ul class="ChecklistList">
@@ -48,7 +48,7 @@ export function ChecklistScreen(id) {
     </nav>
 `;
 
-    RenderChecklist(id);
+    RenderChecklist(ProjectId);
 
     //VARIABLES DIV CHECKLIST LIST
     var ChecklistList = document.querySelector(".ChecklistList");
@@ -87,19 +87,19 @@ export function ChecklistScreen(id) {
 
     //MUDANÇAS DE TELAS EVENTS
     checklist.addEventListener("click", function () {
-        ChecklistScreen(id);
+        ChecklistScreen(ProjectId);
     })
 
     notes.addEventListener("click", function () {
-        NoteScreen(id);
+        NoteScreen(ProjectId);
     })
 
     scrum.addEventListener("click", function () {
-        ScrumScreen(id);
+        ScrumScreen(ProjectId);
     })
 
     ChangeProject.addEventListener("click", function () {
-        ProjectScreen(id);
+        ProjectScreen(ProjectId);
     })
 
     //DIV MENU EVENT
@@ -131,12 +131,12 @@ export function ChecklistScreen(id) {
         if (IsEmptyVerify === true) {
             return;
         }
-
-        InsertChecklist(id, Tasks.value);
+        const Step = "Other";
+        InsertChecklist(ProjectId, Tasks.value);
 
         Clear();
         AddChecklistModal.style.display = "none";
-        RenderChecklist(id);
+        RenderChecklist(ProjectId);
     }
 
     CancelButton.addEventListener("click", function () {
@@ -157,9 +157,9 @@ export function ChecklistScreen(id) {
     }
 
 
-    async function RenderChecklist(id) {
+    async function RenderChecklist(ProjectId) {
 
-        const check = await SelectChecklist(id);
+        const check = await SelectChecklist(ProjectId);
         const container = document.querySelector(".ChecklistList");
         container.innerHTML = "";
         checklist.style.backgroundColor = "#d6d4d4";
@@ -169,10 +169,10 @@ export function ChecklistScreen(id) {
 
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
-            checkbox.id = "item" + task.Id;
+            checkbox.ProjectId = "item" + task.ProjectId;
 
             const label = document.createElement("label");
-            label.htmlFor = checkbox.id;
+            label.htmlFor = checkbox.ProjectId;
             label.textContent = task.Tasks;
 
             li.appendChild(checkbox);
