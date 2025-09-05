@@ -92,17 +92,20 @@ export function ChecklistScreen(ProjectId) {
     //MUDANÇAS DE TELAS EVENTS
 
     notes.addEventListener("click", function () {
+        nav.style.display = "none";
         checklist.style.backgroundColor = "#F4F4F4";
         NoteScreen(ProjectId);
     })
 
     scrum.addEventListener("click", function () {
+        nav.style.display = "none";
         checklist.style.backgroundColor = "#F4F4F4";
         ScrumScreen(ProjectId);
     })
 
     //change project
     ChangeProject.addEventListener("click", function () {
+        nav.style.display = "none";
         checklist.style.backgroundColor = "#F4F4F4";
         ProjectScreen();
     })

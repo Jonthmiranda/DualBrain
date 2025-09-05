@@ -188,8 +188,7 @@ menu.addEventListener("click", function () {
 
     async function RenderNotes(ProjectId) {
         const Notes = await SelectNotes(ProjectId);
-        const container = document.querySelector(".noteList");
-        container.innerHTML = "";
+        noteList.innerHTML = "";
         notes.style.backgroundColor = "#d6d4d4";
     }
 }
