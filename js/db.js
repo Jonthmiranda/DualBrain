@@ -7,7 +7,7 @@ function OpenDB() {
             resolve(db);
             return;
         }
-        const request = indexedDB.open("FokysPWA", 1);//name and version
+        const request = indexedDB.open("DualBrainPWA", 1);//name and version
 
         request.onsuccess = (event) => {
             db = event.target.result;
