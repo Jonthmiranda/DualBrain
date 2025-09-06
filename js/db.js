@@ -105,7 +105,7 @@ export async function SelectProjects() {
 }
 
 //UPDATE PROJECT
-export async function InsertProject(Name, Description, DateStart, DateEnd) {
+export async function InsertProject(Name, Description) {
     try {
         db = await OpenDB();
         const tx = db.transaction("Projects", "readwrite");
@@ -143,7 +143,7 @@ export async function InsertProject(Name, Description, DateStart, DateEnd) {
 }
 
 //EDIT PROJECT
-export async function UpdateProject(Id, Name, Description, DateStart, DateEnd) {
+export async function UpdateProject(Id, Name, Description) {
     try {
         db = await OpenDB();
         const tx = db.transaction("Projects", "readwrite");
@@ -153,9 +153,6 @@ export async function UpdateProject(Id, Name, Description, DateStart, DateEnd) {
             Id: Id,
             Name: Name,
             Description: Description,
-            Stacks: Stacks,
-            DateStart: DateStart,
-            DateEnd: DateEnd
         };
 
         const request = store.put(Project);
