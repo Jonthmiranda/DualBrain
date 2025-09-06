@@ -1,4 +1,4 @@
-//IMPORTS
+//IMPORTS DE JAVASCRIPT
 import { SelectChecklist } from './db.js';
 import { InsertChecklist } from './db.js';
 import { UpdateChecklistCompleted } from './db.js';
@@ -9,6 +9,7 @@ import { ProjectScreen } from './project.js';
 import { NoteScreen } from './note.js';
 import { ScrumScreen } from './scrum.js';
 
+//FUNÇÃO PRIMÁRIA, IMPRIME TELA DE CHECKLIST
 export function ChecklistScreen(ProjectId) {
     document.querySelector("main").innerHTML = `
     <section>
@@ -44,14 +45,12 @@ export function ChecklistScreen(ProjectId) {
         <button id="scrum"><img src="./assets/scrum.png" alt="Scrum" class="buttonLogo"><span>Scrum</span></button>
         <button id="menu"><img src="./assets/menu.png" alt="Menu" class="buttonLogo"></button>
         <div class="MenuContent">
-            <button id="EndProject">Finalize</button>
             <button id="DeleteProjectBt">Delete</button>
             <button id="ChangeProject">Change</button>
-            <button id="Help">Help</button>
         </div>
     </nav>
 `;
-
+    //CHAMA A RENDERIZAÇÃO
     RenderChecklist(ProjectId);
 
     //VARIABLES DIV CHECKLIST LIST
@@ -81,43 +80,42 @@ export function ChecklistScreen(ProjectId) {
     var notes = document.getElementById("notes");
     var scrum = document.getElementById("scrum");
     var menu = document.getElementById("menu");
-    var EndProject = document.getElementById("EndProject");
     var DeleteProjectBt = document.getElementById("DeleteProjectBt");
     var ChangeProject = document.getElementById("ChangeProject");
-    var Help = document.getElementById("Help");
 
     //VARIAVEIS NAV DIVS
     var MenuContent = document.querySelector(".MenuContent");
 
     //MUDANÇAS DE TELAS EVENTS
-
+    //TELA DE ANOTAÇÕES
     notes.addEventListener("click", function () {
         nav.style.display = "none";
         checklist.style.backgroundColor = "#F4F4F4";
         NoteScreen(ProjectId);
     })
 
+    //TELA DE SCRUM
     scrum.addEventListener("click", function () {
         nav.style.display = "none";
         checklist.style.backgroundColor = "#F4F4F4";
         ScrumScreen(ProjectId);
     })
 
-    //change project
+    //TROCA DE PROJETO
     ChangeProject.addEventListener("click", function () {
         nav.style.display = "none";
         checklist.style.backgroundColor = "#F4F4F4";
         ProjectScreen();
     })
 
-    //delete project
+    //DELETE PROJETO
     DeleteProjectBt.addEventListener("click", function () {
         checklist.style.backgroundColor = "#F4F4F4";
         DeleteProject(ProjectId);
         ProjectScreen();
     })
 
-    //DIV MENU EVENT
+    //MENU
     menu.addEventListener("click", function () {
 
         if (MenuContent.style.display === "none") {
@@ -127,38 +125,42 @@ export function ChecklistScreen(ProjectId) {
         }
     })
 
+    //BOTÃO DE ADICIONAR CHECKLIST
     //ADD CHECKLIST
     cadChecklist.addEventListener("click", function () {
         AddChecklistModal.style.display = "flex";
     })
 
+    //MODAL DE ADD CHECKLIST
     AddChecklistButton.addEventListener("click", function () {
         InsertChecklistTratament();
     })
 
+    //BOTÃO DE CONFIRMAÇÃO CASO ESTIVER COM CAMPO DE CHECKLIST VAZIO E FOR CONFIRMADO
     FillFieldButton.addEventListener("click", function () {
         IsEmptyModal.style.display = "none";
     })
 
-    function InsertChecklistTratament() {
-        let IsEmptyVerify = IsEmpty(Tasks.value);
-
-        if (IsEmptyVerify === true) {
-            return;
-        }
-        const Step = "Other";
-        InsertChecklist(ProjectId, Step, Tasks.value);
-
-        Clear();
-        AddChecklistModal.style.display = "none";
-        RenderChecklist(ProjectId);
-    }
-
+    //BOTÃO DE CANCELAR AO ADD CHECKLIST
     CancelButton.addEventListener("click", function () {
         Clear();
         AddChecklistModal.style.display = "none";
     })
 
+    //VERIFICAÇÃO SE ESTIVER VAZIO O CAMPO DE CHECKLIST, E INSERÇÃO NO INSERTCHECKLIST NO ./DB.JS
+    function InsertChecklistTratament() {
+        let IsEmptyVerify = IsEmpty(Tasks.value);
+        if (IsEmptyVerify === true) {
+            return;
+        }
+        const Step = "Other";
+        InsertChecklist(ProjectId, Step, Tasks.value);
+        Clear();
+        AddChecklistModal.style.display = "none";
+        RenderChecklist(ProjectId);
+    }
+
+    //VERIFICAÇÃO SE ESTÁ VAZIO
     function IsEmpty(Tasks) {
         if (Tasks === "") {
             IsEmptyModal.style.display = "flex";
@@ -167,13 +169,13 @@ export function ChecklistScreen(ProjectId) {
         return false;
     }
 
+    //LIMPA CAMPO DE CHECKLIST
     function Clear() {
         document.getElementById("Tasks").value = "";
     }
 
-
+    //RENDERIZA CHECKLISTS
     async function RenderChecklist(ProjectId) {
-
         const check = await SelectChecklist(ProjectId);
         const container = document.querySelector(".ChecklistList");
         container.innerHTML = "";
